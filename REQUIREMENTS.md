@@ -7,6 +7,10 @@ below. Since its just a model, no database or UI is required.
 
 ## Features
 
+### Project setup
+
+TODO: Add anything here to tell Claude how to set up your project
+
 ### Add books to the library
 
 A book has a title, author, and ISBN.
