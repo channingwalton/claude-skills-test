@@ -19,8 +19,14 @@ The features are described in [REQUIREMENTS.md](REQUIREMENTS.md).
 
 `main` contains the template, add branches for experiments.
 
-To ensure no contamination, your own Claude configuration should be temporarily put to one side (mv ~/.claude ~/.claude.bak),
-and all [configuration](https://code.claude.com/docs/en/settings) for Claude should be added to your branch only.
+To ensure no contamination, your own Claude configuration should be temporarily put to one side:
+
+```shell
+mv ~/.claude ~/.claude.bak
+mv ~/.claude.json ~/.claude.json.bak
+```
+
+All [configuration](https://code.claude.com/docs/en/settings) for Claude should be added to your branch only.
 
 Modify the [README.md](README.md) to describe the experiment and record your experiments in INTERVENTIONS.md and
 submit a pull request.
