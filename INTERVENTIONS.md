@@ -8,7 +8,7 @@
 | Clarification | 4 |
 | Redirection | |
 | Reminder | |
-| Approval | 5 |
+| Approval | 6 |
 | **Total** | |
 
 ## Intervention Details
