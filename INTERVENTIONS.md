@@ -76,6 +76,10 @@ Correction:  a non-member can attempt to withdraw a book and get BookUnavailable
 
 Correction:  a non-member can attempt to return a book
 
+### Multi copies - non-members return error type
+
+Correction:  ReturningMemberNotFound is unnecessary, just use MemberNotFound
+
 ## Observations
 
 - Claude did not write tests unless I told it to.
