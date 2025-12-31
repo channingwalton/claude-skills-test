@@ -73,3 +73,4 @@ Outcome: Success
 - Claude did not write tests unless I told it to.
 - Claude used mutable collections by default - this is Scala!
 - Claude put tests in a weird place.
+- I am making clarifications which I'll add to the main project. Its tricky to write generic requirements for any language.
