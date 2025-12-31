@@ -107,3 +107,46 @@ class LibrarySuite extends munit.FunSuite:
       .toOption
       .get
     assertEquals(library.booksForMember(alice), List(book))
+
+  test("a member can only return a book if they withdrew it"):
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addMember(alice)
+      .addMember(bob)
+      .withdraw(alice, book)
+      .toOption
+      .get
+    val result = library.returnBook(bob, book)
+    assertEquals(result, Left(NotWithdrawnByMember(book, bob)))
+
+  test("a member can only return a book once"):
+    val alice = Member("Alice")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addMember(alice)
+      .withdraw(alice, book)
+      .toOption
+      .get
+      .returnBook(alice, book)
+      .toOption
+      .get
+    val result = library.returnBook(alice, book)
+    assertEquals(result, Left(NotWithdrawnByMember(book, alice)))
+
+  test("a member's book list should not contain the book they returned"):
+    val alice = Member("Alice")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addMember(alice)
+      .withdraw(alice, book)
+      .toOption
+      .get
+      .returnBook(alice, book)
+      .toOption
+      .get
+    assertEquals(library.booksForMember(alice), List.empty)

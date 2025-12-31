@@ -4,6 +4,9 @@ sealed trait WithdrawError
 case class BookUnavailable(book: Book) extends WithdrawError
 case class AlreadyWithdrawn(book: Book) extends WithdrawError
 
+sealed trait ReturnError
+case class NotWithdrawnByMember(book: Book, member: Member) extends ReturnError
+
 case class Library(
     books: List[Book] = List.empty,
     members: Set[Member] = Set.empty,
@@ -29,3 +32,8 @@ case class Library(
 
   def booksForMember(member: Member): List[Book] =
     withdrawnBooks.collect { case (book, m) if m == member => book }.toList
+
+  def returnBook(member: Member, book: Book): Either[ReturnError, Library] =
+    withdrawnBooks.get(book) match
+      case Some(m) if m == member => Right(copy(withdrawnBooks = withdrawnBooks - book))
+      case _                      => Left(NotWithdrawnByMember(book, member))
