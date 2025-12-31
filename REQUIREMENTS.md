@@ -29,7 +29,7 @@ add a suitable .gitignore for a scala project
 
 Use the package `claude.skills`
 
-### Members
+### Add Members
 
 Members have names, the library has members, members can be added and removed.
 
