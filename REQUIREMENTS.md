@@ -2,7 +2,7 @@
 
 ## Overview
 
-The goal is to create a model of a library that supports the features described
+The goal is to create a model of a book and video library that supports the features described
 below. Since its just a model, no database or UI is required.
 
 ## Features
@@ -24,7 +24,8 @@ add a suitable .gitignore for a scala project
 
 ### Add books to the library
 
-A book has a title, author, and ISBN.
+- Create a Library that contains books.
+- A book has a title, author, and ISBN.
 
 Use the package `claude.skills`
 
