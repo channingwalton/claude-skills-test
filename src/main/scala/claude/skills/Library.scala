@@ -6,6 +6,7 @@ case class BookUnavailable(book: Book) extends WithdrawError
 case class AlreadyWithdrawn(book: Book) extends WithdrawError
 
 sealed trait ReturnError
+case class ReturningMemberNotFound(member: Member) extends ReturnError
 case class NotWithdrawnByMember(book: Book, member: Member) extends ReturnError
 
 case class Library(
@@ -43,7 +44,8 @@ case class Library(
 
   def returnBook(member: Member, book: Book): Either[ReturnError, Library] =
     val currentHolders = withdrawnBooks.getOrElse(book, Set.empty)
-    if currentHolders.contains(member) then
+    if !members.contains(member) then Left(ReturningMemberNotFound(member))
+    else if currentHolders.contains(member) then
       val updatedHolders = currentHolders - member
       val updatedWithdrawn = if updatedHolders.isEmpty then withdrawnBooks - book else withdrawnBooks + (book -> updatedHolders)
       Right(copy(withdrawnBooks = updatedWithdrawn))
