@@ -5,10 +5,10 @@
 | Category | Count |
 |----------|-------|
 | Correction | 3 |
-| Clarification | 2 |
+| Clarification | 3 |
 | Redirection | |
 | Reminder | |
-| Approval | 3 |
+| Approval | 4 |
 | **Total** | |
 
 ## Intervention Details
@@ -54,7 +54,16 @@ Correction: The tests should have been added to LibrarySuite, not a new Suite
 
 Outcome: Tests were moved into LibrarySuite and the LibraryMemberSuite deleted
 
+### Third task - withdrawing books returning an error if a book cannot be withdrawn
+
+This time tests were written, maybe because I haven't cleared the context.
+
+Clarification: Instead of returning an Option[Library], `withdraw` should return `Either[BookUnavailble, Library]`
+
+Outcome: Success
+
 ## Observations
 
 - Claude did not write tests unless I told it to.
 - Claude used mutable collections by default - this is Scala!
+- Claude put tests in a weird place.

@@ -70,3 +70,40 @@ class LibrarySuite extends munit.FunSuite:
       .removeMember(alice)
     assertEquals(library.members.size, added.size - removed.size)
     assertEquals(library.members, added -- removed)
+
+  test("a member can only withdraw a book that hasn't already been withdrawn"):
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addMember(alice)
+      .addMember(bob)
+      .withdraw(alice, book)
+      .toOption
+      .get
+    val result = library.withdraw(bob, book)
+    assertEquals(result, Left(BookUnavailable(book)))
+
+  test("a member can only withdraw a book once"):
+    val alice = Member("Alice")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addMember(alice)
+      .withdraw(alice, book)
+      .toOption
+      .get
+    val result = library.withdraw(alice, book)
+    assertEquals(result, Left(BookUnavailable(book)))
+
+  test("a member's book list should contain the book they withdrew"):
+    val alice = Member("Alice")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addMember(alice)
+      .withdraw(alice, book)
+      .toOption
+      .get
+    assertEquals(library.booksForMember(alice), List(book))
