@@ -4,11 +4,11 @@
 
 | Category | Count |
 |----------|-------|
-| Correction | 1 |
+| Correction | 3 |
 | Clarification | 2 |
 | Redirection | |
 | Reminder | |
-| Approval | 2 |
+| Approval | 3 |
 | **Total** | |
 
 ## Intervention Details
@@ -49,6 +49,10 @@ Five tests written, they seem reasonable.
 Correction: MemberSuite contains tests for Library, not Members.
 
 Outcome: Instead of adding the tests into LibrarySuite, Claude renamed MemberSuite to LibraryMemberSuite!
+
+Correction: The tests should have been added to LibrarySuite, not a new Suite
+
+Outcome: Tests were moved into LibrarySuite and the LibraryMemberSuite deleted
 
 ## Observations
 
