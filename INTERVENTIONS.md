@@ -4,28 +4,37 @@
 
 | Category | Count |
 |----------|-------|
-| Corrections | |
-| Clarifications | |
-| Redirections | |
-| Reminders | |
-| Approvals | |
+| Correction | |
+| Clarification | 1 |
+| Redirection | |
+| Reminder | |
+| Approval | |
 | **Total** | |
 
 ## Intervention Details
 
-### Intervention 1
+### First Task
 
-- **Category**:
-- **Checkpoint**:
-- **User Message**:
-- **Issue**:
-- **Resolution**:
+Instruction:
+
+- Create a Library that contains books.
+- A book has a title, author, and ISBN.
+- Use the package `claude.skills`
+
+Intervention:
+
+- **Category**: Clarification
+- **Issue**: Claude used mutable collections in the Library
+
+Clarification:
+
+- Do not use mutable collections in scala FP projects
+
+Outcome:
+
+- Claude correctly replaced the mutable collection
 
 ## Observations
 
-### What Worked Well
-
-### What Needed Improvement
-
-### Skill/Agent Issues Noted
-
+- Claude did not write tests unless I told it to.
+- Claude used mutable collections by default - this is Scala!
