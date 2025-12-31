@@ -4,7 +4,7 @@
 
 | Category | Count |
 |----------|-------|
-| Correction | 5 |
+| Correction | 6 |
 | Clarification | 4 |
 | Redirection | |
 | Reminder | |
@@ -79,6 +79,10 @@ Correction:  a non-member can attempt to return a book
 ### Multi copies - non-members return error type
 
 Correction:  ReturningMemberNotFound is unnecessary, just use MemberNotFound
+
+### Multi copies - confused error types
+
+Correction: MemberNotFound doesn't need to extend WithdrawError or ReturnError, its neither of those things.
 
 ## Observations
 

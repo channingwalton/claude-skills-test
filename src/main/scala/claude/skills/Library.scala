@@ -1,12 +1,12 @@
 package claude.skills
 
-sealed trait WithdrawError
-sealed trait ReturnError
+case class MemberNotFound(member: Member)
 
-case class MemberNotFound(member: Member) extends WithdrawError with ReturnError
+sealed trait WithdrawError
 case class BookUnavailable(book: Book) extends WithdrawError
 case class AlreadyWithdrawn(book: Book) extends WithdrawError
 
+sealed trait ReturnError
 case class NotWithdrawnByMember(book: Book, member: Member) extends ReturnError
 
 case class Library(
@@ -32,7 +32,7 @@ case class Library(
   def availableCopies(book: Book): Int =
     copyCount(book) - withdrawnBooks.getOrElse(book, Set.empty).size
 
-  def withdraw(member: Member, book: Book): Either[WithdrawError, Library] =
+  def withdraw(member: Member, book: Book): Either[MemberNotFound | WithdrawError, Library] =
     val currentHolders = withdrawnBooks.getOrElse(book, Set.empty)
     if !members.contains(member) then Left(MemberNotFound(member))
     else if currentHolders.contains(member) then Left(AlreadyWithdrawn(book))
@@ -42,7 +42,7 @@ case class Library(
   def booksForMember(member: Member): List[Book] =
     withdrawnBooks.collect { case (book, members) if members.contains(member) => book }.toList
 
-  def returnBook(member: Member, book: Book): Either[ReturnError, Library] =
+  def returnBook(member: Member, book: Book): Either[MemberNotFound | ReturnError, Library] =
     val currentHolders = withdrawnBooks.getOrElse(book, Set.empty)
     if !members.contains(member) then Left(MemberNotFound(member))
     else if currentHolders.contains(member) then
