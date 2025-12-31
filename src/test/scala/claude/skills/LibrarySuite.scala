@@ -202,3 +202,11 @@ class LibrarySuite extends munit.FunSuite:
     assertEquals(afterBob.availableCopies(book), 1)
     val afterCharlie = afterBob.withdraw(charlie, book).toOption.get
     assertEquals(afterCharlie.availableCopies(book), 0)
+
+  test("a non-member attempting to withdraw gets MemberNotFound"):
+    val nonMember = Member("NonMember")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+    val result = library.withdraw(nonMember, book)
+    assertEquals(result, Left(MemberNotFound(nonMember)))

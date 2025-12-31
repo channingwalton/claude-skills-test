@@ -1,6 +1,7 @@
 package claude.skills
 
 sealed trait WithdrawError
+case class MemberNotFound(member: Member) extends WithdrawError
 case class BookUnavailable(book: Book) extends WithdrawError
 case class AlreadyWithdrawn(book: Book) extends WithdrawError
 
@@ -32,7 +33,8 @@ case class Library(
 
   def withdraw(member: Member, book: Book): Either[WithdrawError, Library] =
     val currentHolders = withdrawnBooks.getOrElse(book, Set.empty)
-    if currentHolders.contains(member) then Left(AlreadyWithdrawn(book))
+    if !members.contains(member) then Left(MemberNotFound(member))
+    else if currentHolders.contains(member) then Left(AlreadyWithdrawn(book))
     else if availableCopies(book) <= 0 then Left(BookUnavailable(book))
     else Right(copy(withdrawnBooks = withdrawnBooks + (book -> (currentHolders + member))))
 

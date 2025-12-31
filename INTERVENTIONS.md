@@ -4,7 +4,7 @@
 
 | Category | Count |
 |----------|-------|
-| Correction | 3 |
+| Correction | 4 |
 | Clarification | 4 |
 | Redirection | |
 | Reminder | |
@@ -67,6 +67,10 @@ Outcome: Success
 Clarification: If a book is withdrawn twice by the same member, `withdraw` should return Left(AlreadyWithDrawn)
 
 Outcome: Success
+
+### Multi copies - non-members
+
+Correction:  a non-member can attempt to withdraw a book and get BookUnavailable rather than a MemberNotFound error
 
 ## Observations
 
