@@ -1,6 +1,6 @@
 package claude.skills
 
-class MemberSuite extends munit.FunSuite:
+class LibraryMemberSuite extends munit.FunSuite:
 
   test("members can only be added once"):
     val member = Member("Alice")

@@ -4,7 +4,7 @@
 
 | Category | Count |
 |----------|-------|
-| Correction | |
+| Correction | 1 |
 | Clarification | 2 |
 | Redirection | |
 | Reminder | |
@@ -43,6 +43,12 @@ Clarification:
 Outcome:
 
 Five tests written, they seem reasonable.
+
+### Second task - members
+
+Correction: MemberSuite contains tests for Library, not Members.
+
+Outcome: Instead of adding the tests into LibrarySuite, Claude renamed MemberSuite to LibraryMemberSuite!
 
 ## Observations
 
