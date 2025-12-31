@@ -5,10 +5,10 @@
 | Category | Count |
 |----------|-------|
 | Correction | |
-| Clarification | 1 |
+| Clarification | 2 |
 | Redirection | |
 | Reminder | |
-| Approval | |
+| Approval | 2 |
 | **Total** | |
 
 ## Intervention Details
