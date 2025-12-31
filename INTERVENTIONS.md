@@ -5,10 +5,10 @@
 | Category | Count |
 |----------|-------|
 | Correction | 3 |
-| Clarification | 3 |
+| Clarification | 4 |
 | Redirection | |
 | Reminder | |
-| Approval | 4 |
+| Approval | 5 |
 | **Total** | |
 
 ## Intervention Details
@@ -59,6 +59,12 @@ Outcome: Tests were moved into LibrarySuite and the LibraryMemberSuite deleted
 This time tests were written, maybe because I haven't cleared the context.
 
 Clarification: Instead of returning an Option[Library], `withdraw` should return `Either[BookUnavailble, Library]`
+
+Outcome: Success
+
+### Third task - withdrawing the same book twice is a different kind of error
+
+Clarification: If a book is withdrawn twice by the same member, `withdraw` should return Left(AlreadyWithDrawn)
 
 Outcome: Success
 

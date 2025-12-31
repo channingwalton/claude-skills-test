@@ -95,7 +95,7 @@ class LibrarySuite extends munit.FunSuite:
       .toOption
       .get
     val result = library.withdraw(alice, book)
-    assertEquals(result, Left(BookUnavailable(book)))
+    assertEquals(result, Left(AlreadyWithdrawn(book)))
 
   test("a member's book list should contain the book they withdrew"):
     val alice = Member("Alice")

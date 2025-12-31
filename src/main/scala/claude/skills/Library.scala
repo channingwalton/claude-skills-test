@@ -1,6 +1,8 @@
 package claude.skills
 
-case class BookUnavailable(book: Book)
+sealed trait WithdrawError
+case class BookUnavailable(book: Book) extends WithdrawError
+case class AlreadyWithdrawn(book: Book) extends WithdrawError
 
 case class Library(
     books: List[Book] = List.empty,
@@ -19,9 +21,11 @@ case class Library(
   def findMemberByName(name: String): Option[Member] =
     members.find(_.name == name)
 
-  def withdraw(member: Member, book: Book): Either[BookUnavailable, Library] =
-    if withdrawnBooks.contains(book) then Left(BookUnavailable(book))
-    else Right(copy(withdrawnBooks = withdrawnBooks + (book -> member)))
+  def withdraw(member: Member, book: Book): Either[WithdrawError, Library] =
+    withdrawnBooks.get(book) match
+      case Some(m) if m == member => Left(AlreadyWithdrawn(book))
+      case Some(_)                => Left(BookUnavailable(book))
+      case None                   => Right(copy(withdrawnBooks = withdrawnBooks + (book -> member)))
 
   def booksForMember(member: Member): List[Book] =
     withdrawnBooks.collect { case (book, m) if m == member => book }.toList
