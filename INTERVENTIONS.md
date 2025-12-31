@@ -34,6 +34,16 @@ Outcome:
 
 - Claude correctly replaced the mutable collection
 
+### First task - no tests
+
+Clarification:
+
+- Please write tests
+
+Outcome:
+
+Five tests written, they seem reasonable.
+
 ## Observations
 
 - Claude did not write tests unless I told it to.
