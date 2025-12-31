@@ -8,12 +8,12 @@ sealed trait ReturnError
 case class NotWithdrawnByMember(book: Book, member: Member) extends ReturnError
 
 case class Library(
-    books: List[Book] = List.empty,
+    books: Map[Book, Int] = Map.empty,
     members: Set[Member] = Set.empty,
-    withdrawnBooks: Map[Book, Member] = Map.empty
+    withdrawnBooks: Map[Book, Set[Member]] = Map.empty
 ):
   def addBook(book: Book): Library =
-    copy(books = books :+ book)
+    copy(books = books + (book -> (books.getOrElse(book, 0) + 1)))
 
   def addMember(member: Member): Library =
     copy(members = members + member)
@@ -24,16 +24,25 @@ case class Library(
   def findMemberByName(name: String): Option[Member] =
     members.find(_.name == name)
 
+  def copyCount(book: Book): Int =
+    books.getOrElse(book, 0)
+
+  def availableCopies(book: Book): Int =
+    copyCount(book) - withdrawnBooks.getOrElse(book, Set.empty).size
+
   def withdraw(member: Member, book: Book): Either[WithdrawError, Library] =
-    withdrawnBooks.get(book) match
-      case Some(m) if m == member => Left(AlreadyWithdrawn(book))
-      case Some(_)                => Left(BookUnavailable(book))
-      case None                   => Right(copy(withdrawnBooks = withdrawnBooks + (book -> member)))
+    val currentHolders = withdrawnBooks.getOrElse(book, Set.empty)
+    if currentHolders.contains(member) then Left(AlreadyWithdrawn(book))
+    else if availableCopies(book) <= 0 then Left(BookUnavailable(book))
+    else Right(copy(withdrawnBooks = withdrawnBooks + (book -> (currentHolders + member))))
 
   def booksForMember(member: Member): List[Book] =
-    withdrawnBooks.collect { case (book, m) if m == member => book }.toList
+    withdrawnBooks.collect { case (book, members) if members.contains(member) => book }.toList
 
   def returnBook(member: Member, book: Book): Either[ReturnError, Library] =
-    withdrawnBooks.get(book) match
-      case Some(m) if m == member => Right(copy(withdrawnBooks = withdrawnBooks - book))
-      case _                      => Left(NotWithdrawnByMember(book, member))
+    val currentHolders = withdrawnBooks.getOrElse(book, Set.empty)
+    if currentHolders.contains(member) then
+      val updatedHolders = currentHolders - member
+      val updatedWithdrawn = if updatedHolders.isEmpty then withdrawnBooks - book else withdrawnBooks + (book -> updatedHolders)
+      Right(copy(withdrawnBooks = updatedWithdrawn))
+    else Left(NotWithdrawnByMember(book, member))

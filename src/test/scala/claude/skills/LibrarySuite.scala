@@ -10,19 +10,19 @@ class LibrarySuite extends munit.FunSuite:
 
   test("Library starts empty"):
     val library = Library()
-    assertEquals(library.books, List.empty)
+    assertEquals(library.books, Map.empty)
 
   test("addBook returns a new Library with the book"):
     val library = Library()
     val book = Book("1984", "George Orwell", "978-0451524935")
     val updatedLibrary = library.addBook(book)
-    assertEquals(updatedLibrary.books, List(book))
+    assertEquals(updatedLibrary.books, Map(book -> 1))
 
   test("addBook does not mutate the original Library"):
     val library = Library()
     val book = Book("1984", "George Orwell", "978-0451524935")
     library.addBook(book)
-    assertEquals(library.books, List.empty)
+    assertEquals(library.books, Map.empty)
 
   test("multiple books can be added"):
     val book1 = Book("1984", "George Orwell", "978-0451524935")
@@ -30,7 +30,7 @@ class LibrarySuite extends munit.FunSuite:
     val library = Library()
       .addBook(book1)
       .addBook(book2)
-    assertEquals(library.books, List(book1, book2))
+    assertEquals(library.books, Map(book1 -> 1, book2 -> 1))
 
   test("members can only be added once"):
     val member = Member("Alice")
@@ -150,3 +150,55 @@ class LibrarySuite extends munit.FunSuite:
       .toOption
       .get
     assertEquals(library.booksForMember(alice), List.empty)
+
+  test("multiple copies can be added to the library"):
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addBook(book)
+      .addBook(book)
+    assertEquals(library.copyCount(book), 3)
+
+  test("the library knows how many copies of a book it has"):
+    val book1 = Book("1984", "George Orwell", "978-0451524935")
+    val book2 = Book("Brave New World", "Aldous Huxley", "978-0060850524")
+    val library = Library()
+      .addBook(book1)
+      .addBook(book1)
+      .addBook(book2)
+    assertEquals(library.copyCount(book1), 2)
+    assertEquals(library.copyCount(book2), 1)
+
+  test("members can only withdraw a book if there is a copy available"):
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addMember(alice)
+      .addMember(bob)
+      .withdraw(alice, book)
+      .toOption
+      .get
+    val result = library.withdraw(bob, book)
+    assertEquals(result, Left(BookUnavailable(book)))
+
+  test("the number of available copies for withdrawal should account for withdrawals"):
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val charlie = Member("Charlie")
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library()
+      .addBook(book)
+      .addBook(book)
+      .addBook(book)
+      .addMember(alice)
+      .addMember(bob)
+      .addMember(charlie)
+    assertEquals(library.availableCopies(book), 3)
+    val afterAlice = library.withdraw(alice, book).toOption.get
+    assertEquals(afterAlice.availableCopies(book), 2)
+    val afterBob = afterAlice.withdraw(bob, book).toOption.get
+    assertEquals(afterBob.availableCopies(book), 1)
+    val afterCharlie = afterBob.withdraw(charlie, book).toOption.get
+    assertEquals(afterCharlie.availableCopies(book), 0)
