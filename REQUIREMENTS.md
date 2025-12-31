@@ -1,13 +1,9 @@
-# Requirements: A Library
+# Requirements
 
 ## Overview
 
-The goal is to create a model of a library that supports:
-
-- stocking books and videos
-- searching
-- limiting the number of books and videos that members can check out at once
-- find members with overdue books or videos
+The goal is to create a model of a library that supports the features described
+below. Since its just a model, no database or UI is required.
 
 ## Features
 
@@ -17,29 +13,42 @@ A book has a title, author, and ISBN.
 
 ### Members
 
-- A member has a name
-- The library has members
-- Members can be removed
+Members have names, the library has members, members can be added and removed.
 
 Tests:
+
 - members can only be added once
 - members can be found by name
 - members can be removed
 - the sum of members added and removed should be equal to the number of members
 
-### Checkout books
+### Withdrawing books
 
-- A member can check out a book.
+A member can withdraw a book.
 
 Tests:
-- a member can only check out a book once.
-- A member's book list should contain the book they checked out.
+
+- A member can only withdraw a book that hasn't already been withdrawn
+- A member can only withdraw a book once
+- A member's book list should contain the book they withdrew
 
 ### Return books
 
-- A member can return a book.
+A member can return a book.
 
 Tests:
-- A member can only return a book if they checked it out
+
+- A member can only return a book if they withdrew it
 - A member can only return a book once
 - A member's book list should not contain the book they returned
+
+### Multiple copies
+
+Libraries contain multiple copies of a book
+
+Tests:
+
+- Add multiple copies to the library
+- The library knows how many copies of a book it has
+- Members can only withdraw a book if there is a copy available
+- The number of available copies for withdrawal should account for withdrawals
