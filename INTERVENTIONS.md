@@ -4,11 +4,11 @@
 
 | Category | Count |
 |----------|-------|
-| Correction | 6 |
+| Correction | 7 |
 | Clarification | 4 |
 | Redirection | |
 | Reminder | |
-| Approval | 6 |
+| Approval | 7 |
 | **Total** | |
 
 ## Intervention Details
@@ -83,6 +83,10 @@ Correction:  ReturningMemberNotFound is unnecessary, just use MemberNotFound
 ### Multi copies - confused error types
 
 Correction: MemberNotFound doesn't need to extend WithdrawError or ReturnError, its neither of those things.
+
+### Multi copies - more confused error types
+
+Correction: create an ADT of LibraryError to avoid functions returning union types
 
 ## Observations
 
