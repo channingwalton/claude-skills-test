@@ -19,3 +19,5 @@
 - Tests pass - committing
 - and so on
 - The CLAUDE.md instructions need improvement because Claude was writing lots of tests at once
+- Scala implementation is poor, not FP at all
+- The `multiple copies` step made Claude realise it needed to restructure things

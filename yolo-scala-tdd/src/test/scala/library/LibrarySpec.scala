@@ -233,3 +233,63 @@ class LibrarySpec extends FunSuite:
     library.withdrawBook(alice, hobbit)
     library.returnBook(alice, hobbit)
     assertEquals(library.getBooksForMember(alice).size, 0)
+
+  // Multiple copies tests
+  test("can add multiple copies of a book to the library"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addBook(hobbit)
+    library.addBook(hobbit)
+    library.addBook(hobbit)
+    assertEquals(library.getCopyCount(hobbit), 3)
+
+  test("the library knows how many copies of a book it has"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    val dune = Book("Dune", "Frank Herbert", "978-0-441-17271-9")
+    library.addBook(hobbit)
+    library.addBook(hobbit)
+    library.addBook(dune)
+    assertEquals(library.getCopyCount(hobbit), 2)
+    assertEquals(library.getCopyCount(dune), 1)
+
+  test("members can only withdraw a book if there is a copy available"):
+    val library = Library()
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addMember(bob)
+    library.addBook(hobbit)
+    library.withdrawBook(alice, hobbit)
+    val result = library.withdrawBook(bob, hobbit)
+    assertEquals(result, false)
+
+  test("available copies decrease when withdrawing"):
+    val library = Library()
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addMember(bob)
+    library.addBook(hobbit)
+    library.addBook(hobbit)
+    assertEquals(library.getAvailableCopyCount(hobbit), 2)
+    library.withdrawBook(alice, hobbit)
+    assertEquals(library.getAvailableCopyCount(hobbit), 1)
+    library.withdrawBook(bob, hobbit)
+    assertEquals(library.getAvailableCopyCount(hobbit), 0)
+
+  test("multiple members can withdraw copies of the same book"):
+    val library = Library()
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addMember(bob)
+    library.addBook(hobbit)
+    library.addBook(hobbit)
+    val result1 = library.withdrawBook(alice, hobbit)
+    val result2 = library.withdrawBook(bob, hobbit)
+    assertEquals(result1, true)
+    assertEquals(result2, true)
