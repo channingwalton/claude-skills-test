@@ -1,0 +1,198 @@
+---
+name: XP
+description: Extreme Programming workflow orchestrator. Use when implementing features. Coordinates planning, TDD, refactoring, and commits.
+---
+
+# Extreme Programming Workflow
+
+## Overview
+
+This skill orchestrates the full XP workflow for feature implementation. It coordinates sub-skills and ensures proper sequencing of phases.
+
+## The XP Workflow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  📋 PLAN     → Discuss and break down the feature          │
+│  🔴 DEVELOP  → TDD cycle (red-green)                       │
+│  🔵 REFACTOR → Improve design (tests stay green)           │
+│  💾 COMMIT   → Save working state                          │
+│  🔁 ITERATE  → Next slice or feature complete              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Phase 1: Planning (📋 PLAN)
+
+**Goal:** Understand and decompose the feature before writing any code.
+
+### Steps
+
+1. **Discuss requirements** with the user
+   - What problem does this feature solve?
+   - What is the expected behaviour?
+   - What are the acceptance criteria?
+
+2. **Break into vertical slices**
+   - Each slice delivers working functionality
+   - Slices are small enough to complete in one TDD cycle
+   - Order slices by dependency and value
+
+3. **Confirm understanding**
+   - Summarise back to the user
+   - Ask clarifying questions
+   - Agree on the first slice to implement
+
+### Output
+
+```
+## Feature: [name]
+
+### Acceptance Criteria
+- [ ] Criterion 1
+- [ ] Criterion 2
+
+### Slices (in order)
+1. [First slice] — [why first]
+2. [Second slice] — [dependency on first]
+3. ...
+
+### Starting with
+Slice 1: [description]
+```
+
+---
+
+## Phase 2: Development (🔴 DEVELOP)
+
+**Goal:** Implement the slice using strict TDD.
+
+**Invoke:** Switch to `development` skill or follow TDD cycle:
+
+```
+🔴 RED    → Write ONE failing test for the slice
+🟢 GREEN  → Write MINIMUM code to pass
+✅ VERIFY → Run tests, confirm all green
+```
+
+### Rules
+
+- One test at a time
+- Test must fail before writing production code
+- Write only enough code to pass the test
+- Do not skip to implementation
+
+---
+
+## Phase 3: Refactoring (🔵 REFACTOR)
+
+**Goal:** Improve code design while keeping tests green.
+
+**Invoke:** Switch to `refactor` skill or follow cycle:
+
+```
+✅ VERIFY   → Confirm tests pass
+🔍 ANALYSE  → Identify improvement opportunity
+🔵 REFACTOR → Apply ONE transformation
+✅ VERIFY   → Confirm tests still pass
+```
+
+### When to Refactor
+
+- After each green test (brief cleanup)
+- After completing a slice (structural improvements)
+- When code smells accumulate
+
+---
+
+## Phase 4: Commit (💾 COMMIT)
+
+**Goal:** Save working state with clear commit message.
+
+**Invoke:** Switch to `commit-helper` skill
+
+### Commit Points
+
+- After each passing test (optional, small commits)
+- After completing a slice (recommended)
+- After refactoring session
+
+---
+
+## Phase 5: Iterate (🔁 ITERATE)
+
+**Goal:** Continue until feature complete.
+
+1. Mark slice as done
+2. Review remaining slices
+3. Adjust plan if needed (new learnings)
+4. Return to Phase 2 for next slice
+5. When all slices complete → feature done
+
+---
+
+## Workflow Diagram
+
+```
+          ┌──────────────────────────────────────────┐
+          │                                          │
+          ▼                                          │
+     ┌────────┐                                      │
+     │  PLAN  │ ← Discuss, break down, confirm       │
+     └────┬───┘                                      │
+          │                                          │
+          ▼                                          │
+     ┌────────┐                                      │
+     │DEVELOP │ ← TDD: Red → Green → Verify          │
+     └────┬───┘                                      │
+          │                                          │
+          ▼                                          │
+    ┌──────────┐                                     │
+    │ REFACTOR │ ← Improve design, tests green       │
+    └────┬─────┘                                     │
+          │                                          │
+          ▼                                          │
+     ┌────────┐                                      │
+     │ COMMIT │ ← Save state                         │
+     └────┬───┘                                      │
+          │                                          │
+          ▼                                          │
+     ┌────────┐    More slices?                      │
+     │ITERATE │ ───────────────────────────────────► │
+     └────┬───┘                                      │
+          │                                          │
+          ▼ Done                                     │
+     ┌────────┐                                      │
+     │  END   │                                      │
+     └────────┘                                      │
+```
+
+## Announcing Phase Transitions
+
+When switching phases, announce clearly:
+
+```
+📋 PLAN → Starting feature discussion
+🔴 DEVELOP → Writing failing test for [slice]
+🟢 DEVELOP → Making test pass
+🔵 REFACTOR → Improving [aspect]
+💾 COMMIT → Saving [slice] implementation
+🔁 ITERATE → Moving to next slice
+✅ COMPLETE → Feature done
+```
+
+## Integration with Sub-Skills
+
+| Phase | Skill | Agent |
+|-------|-------|-------|
+| PLAN | (inline) | — |
+| DEVELOP | `development` | — |
+| REFACTOR | `refactor` | — |
+| COMMIT | `commit-helper` | `commit-helper` |
+
+## Core Principles (Always Apply)
+
+- **Communication first** — discuss before coding
+- **Small steps** — one slice, one test, one change at a time
+- **Continuous feedback** — tests run constantly
+- **Simplicity** — implement only what's needed now
+- **Courage** — refactor fearlessly (tests protect you)
