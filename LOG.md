@@ -1,10 +1,8 @@
-# Intervention Log
+# Log
 
 COPY this into your module.
 
-## Intervention Details
-
-### Intervention 1
+## Feature - description
 
 It did not go well ...
 
