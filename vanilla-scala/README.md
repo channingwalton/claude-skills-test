@@ -2,11 +2,6 @@
 
 This experiment uses Claude Code with no modifications at all.
 
-The first commit relates to setting up the project for Scala 3.
+Its written in Scala 3 and built with SBT.
 
-```shell
-Add the required build files for a scala 3 project:
-  sbt: 1.11.7
-  scala 3.3.7
-  libs: munit 1.2.1
-```
+There were no manual interventions to the code.
