@@ -2,10 +2,12 @@ package library
 
 import scala.collection.mutable.ListBuffer
 import scala.collection.mutable.Set
+import scala.collection.mutable.Map
 
 class Library:
   private val _books: ListBuffer[Book] = ListBuffer.empty
   private val _members: Set[Member] = Set.empty
+  private val _withdrawals: Map[Book, Member] = Map.empty
 
   def addBook(book: Book): Unit = _books += book
 
@@ -34,3 +36,12 @@ class Library:
     _members.find(_.name == name)
 
   def removeMember(member: Member): Unit = _members -= member
+
+  def withdrawBook(member: Member, book: Book): Boolean =
+    if _withdrawals.contains(book) then false
+    else
+      _withdrawals += (book -> member)
+      true
+
+  def getBooksForMember(member: Member): Seq[Book] =
+    _withdrawals.filter(_._2 == member).keys.toSeq

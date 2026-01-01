@@ -147,3 +147,45 @@ class LibrarySpec extends FunSuite:
     library.addMember(charlie)
     library.removeMember(bob)
     assertEquals(library.members.size, 2)
+
+  // Withdrawal tests
+  test("a member can withdraw a book"):
+    val library = Library()
+    val alice = Member("Alice")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addBook(hobbit)
+    val result = library.withdrawBook(alice, hobbit)
+    assertEquals(result, true)
+
+  test("a member can only withdraw a book that hasn't already been withdrawn"):
+    val library = Library()
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addMember(bob)
+    library.addBook(hobbit)
+    library.withdrawBook(alice, hobbit)
+    val result = library.withdrawBook(bob, hobbit)
+    assertEquals(result, false)
+
+  test("a member can only withdraw a book once"):
+    val library = Library()
+    val alice = Member("Alice")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addBook(hobbit)
+    library.withdrawBook(alice, hobbit)
+    val result = library.withdrawBook(alice, hobbit)
+    assertEquals(result, false)
+
+  test("a member's book list should contain the book they withdrew"):
+    val library = Library()
+    val alice = Member("Alice")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addBook(hobbit)
+    library.withdrawBook(alice, hobbit)
+    assertEquals(library.getBooksForMember(alice).size, 1)
+    assertEquals(library.getBooksForMember(alice).head, hobbit)
