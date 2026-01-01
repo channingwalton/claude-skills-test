@@ -5,7 +5,7 @@
 The goal is to create a model of a book and video library that supports the features described
 below. Since its just a model, no database or UI is required.
 
-## Features
+## Features version 1
 
 ### Project setup
 
@@ -13,7 +13,7 @@ Add anything here to you asked Claude Code to do to set up the project.
 
 ### Add books to the library
 
-- Create a Library that contains books.
+- Create a Library that contains a collection of Books.
 - A book has a title, author, and ISBN.
 
 Use the package `claude.skills`

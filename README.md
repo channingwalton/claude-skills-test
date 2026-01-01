@@ -26,34 +26,23 @@ mv ~/.claude ~/.claude.bak
 mv ~/.claude.json ~/.claude.json.bak
 ```
 
-All [configuration](https://code.claude.com/docs/en/settings) for Claude should be added to your branch only.
+All [configuration](https://code.claude.com/docs/en/settings) for Claude should be added to your module only.
 
-Add a [README.md](README.md) to your project to describe the experiment, record your experiments in an INTERVENTIONS.md doc, and
-submit a pull request.
+Add a [README.md](README.md) to your project to describe the experiment, record your experiments in an INTERVENTIONS.md doc, and submit a pull request.
 
 Finally, add to the summary table below.
 
 You are free to work through the requirements in any way you like, but I've ordered the features to force some
 rework to see how Claude copes with that.
 
-## Intervention Categories
-
-| Category          | Description                            |
-|-------------------|----------------------------------------|
-| **Correction**    | Fixing incorrect code or approach      |
-| **Clarification** | Answering questions about requirements |
-| **Redirection**   | Getting back on track after tangent    |
-| **Reminder**      | Prompting to follow skill guidelines   |
-| **Approval**      | Confirming a proposed approach         |
-
-## Success Criteria
+## Success criteria
 
 - Fully tested
 - All tests pass
 - Conventional commits with meaningful messages
 
-## Experiments
+## Experimental summary
 
-| Location | Description | Corrections | Language |
-|----------|-------------|-------------|----------|
-| [vanilla-scala](/vanilla-scala/README.md)| No Claude config | 7 | Scala 3 |
+| Requirements version | Location | Description | Corrections | Language | Interventions log |
+|----------------------|--------------|-------------------|-------------|----------|-------------------|
+| 1                    | [vanilla-scala](/vanilla-scala/README.md) | No Claude config | 7 | Scala 3 | [Interventions](/vanilla-scala/INTERVENTIONS.md) |

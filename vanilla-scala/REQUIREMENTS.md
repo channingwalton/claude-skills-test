@@ -7,7 +7,7 @@ Copied from the project [README](../README.md) with a few tweaks for Scala.
 The goal is to create a model of a book and video library that supports the features described
 below. Since its just a model, no database or UI is required.
 
-## Features
+## Features version 1
 
 ### Project setup
 
