@@ -6,3 +6,10 @@
 
 - Claude tried to use git history to cheat :D
 - Began by asserting it will follow TDD principles
+- Wrote an unnecessary test for Book
+- Ran the test which didn't compile as expected
+- Wrote the Book case class
+- Ran the test which passed
+- Committing!
+- Continued to follow TDD loop
+
