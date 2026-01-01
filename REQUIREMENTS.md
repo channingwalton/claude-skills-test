@@ -1,4 +1,4 @@
-# Requirements
+# Requirements - Version 2
 
 COPY this into your module.
 
@@ -7,7 +7,7 @@ COPY this into your module.
 The goal is to create a model of a book and video library that supports the features described
 below. Since its just a model, no database or UI is required.
 
-## Features version 2
+## Features
 
 ### Project setup
 
