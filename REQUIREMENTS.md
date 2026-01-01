@@ -2,6 +2,9 @@
 
 COPY this into your module.
 
+The requirements are versioned so we can change it over time and have the illusion
+of tracking what we are doing.
+
 ## Overview
 
 The goal is to create a model of a book and video library that supports the features described
