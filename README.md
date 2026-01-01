@@ -1,4 +1,4 @@
-# Claude Skills and Agents Test Framework
+# Claude Code Skills and Agents Tests
 
 A small project for evaluating Claude Code skills and agents.
 
