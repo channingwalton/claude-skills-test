@@ -1,6 +1,10 @@
 package library
 
-case class Library(books: List[Book], members: List[Member] = List.empty):
+case class Library(
+    books: List[Book],
+    members: List[Member] = List.empty,
+    loans: List[Loan] = List.empty
+):
   def addBook(book: Book): Library =
     copy(books = books :+ book)
 
@@ -42,6 +46,19 @@ case class Library(books: List[Book], members: List[Member] = List.empty):
 
   def findMemberByName(name: String): Option[Member] =
     members.find(_.name == name)
+
+  def withdrawBook(member: Member, book: Book): Either[WithdrawalError, Library] =
+    if !members.contains(member) then
+      Left(WithdrawalError.MemberNotRegistered)
+    else if !books.contains(book) then
+      Left(WithdrawalError.BookNotInLibrary)
+    else if loans.exists(_.book == book) then
+      Left(WithdrawalError.BookAlreadyWithdrawn)
+    else
+      Right(copy(loans = loans :+ Loan(member, book)))
+
+  def getBooksForMember(member: Member): List[Book] =
+    loans.filter(_.member == member).map(_.book)
 
 object Library:
   val empty: Library = Library(books = List.empty)
