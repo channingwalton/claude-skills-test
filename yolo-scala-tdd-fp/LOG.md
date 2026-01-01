@@ -15,3 +15,4 @@
 - Used case classes following FP principles
 - Used proper return types for errors (`Either`)
 - Eliminated duplication in search functions without prompting
+- Loans caused more complexity than other solutions required with a Loan type

@@ -47,12 +47,20 @@ case class Library(
   def findMemberByName(name: String): Option[Member] =
     members.find(_.name == name)
 
+  def getCopiesCount(book: Book): Int =
+    books.count(_ == book)
+
+  def getAvailableCopiesCount(book: Book): Int =
+    val totalCopies = getCopiesCount(book)
+    val loanedCopies = loans.count(_.book == book)
+    totalCopies - loanedCopies
+
   def withdrawBook(member: Member, book: Book): Either[WithdrawalError, Library] =
     if !members.contains(member) then
       Left(WithdrawalError.MemberNotRegistered)
     else if !books.contains(book) then
       Left(WithdrawalError.BookNotInLibrary)
-    else if loans.exists(_.book == book) then
+    else if getAvailableCopiesCount(book) <= 0 then
       Left(WithdrawalError.BookAlreadyWithdrawn)
     else
       Right(copy(loans = loans :+ Loan(member, book)))
