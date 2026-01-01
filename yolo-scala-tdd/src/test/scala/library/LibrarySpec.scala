@@ -102,3 +102,48 @@ class LibrarySpec extends FunSuite:
     library.addBook(hobbit)
     assertEquals(library.searchByIsbn("97").size, 0)
     assertEquals(library.searchByIsbn("978").size, 1)
+
+  // Member tests
+  test("a member has a name"):
+    val member = Member("Alice")
+    assertEquals(member.name, "Alice")
+
+  test("members can be added to the library"):
+    val library = Library()
+    val member = Member("Alice")
+    library.addMember(member)
+    assertEquals(library.members.size, 1)
+
+  test("members can only be added once"):
+    val library = Library()
+    val alice = Member("Alice")
+    library.addMember(alice)
+    library.addMember(alice)
+    assertEquals(library.members.size, 1)
+
+  test("members can be found by name"):
+    val library = Library()
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    library.addMember(alice)
+    library.addMember(bob)
+    assertEquals(library.findMemberByName("Alice"), Some(alice))
+    assertEquals(library.findMemberByName("Charlie"), None)
+
+  test("members can be removed"):
+    val library = Library()
+    val alice = Member("Alice")
+    library.addMember(alice)
+    library.removeMember(alice)
+    assertEquals(library.members.size, 0)
+
+  test("member count equals added minus removed"):
+    val library = Library()
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val charlie = Member("Charlie")
+    library.addMember(alice)
+    library.addMember(bob)
+    library.addMember(charlie)
+    library.removeMember(bob)
+    assertEquals(library.members.size, 2)
