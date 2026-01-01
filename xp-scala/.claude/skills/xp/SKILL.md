@@ -76,20 +76,7 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 **Goal:** Improve code design while keeping tests green.
 
-**Invoke:** Switch to `refactor` skill or follow cycle:
-
-```
-✅ VERIFY   → Confirm tests pass
-🔍 ANALYSE  → Identify improvement opportunity
-🔵 REFACTOR → Apply ONE transformation
-✅ VERIFY   → Confirm tests still pass
-```
-
-### When to Refactor
-
-- After each green test (brief cleanup)
-- After completing a slice (structural improvements)
-- When code smells accumulate
+**Invoke:** Switch to `refactor` skill:
 
 ---
 
