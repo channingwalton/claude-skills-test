@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(xp)",
+      "Bash(sbt --error test:*)",
+      "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala diff)",
+      "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala log --oneline -5)",
+      "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala add src/)",
+      "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala diff --cached)",
+      "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala commit -m \"$\\(cat <<''EOF''\nfeat: add books to library\n\n- Book case class with title, author, isbn\n- Library with immutable book collection\n- addBook returns new Library instance\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}

@@ -27,38 +27,27 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 ### Steps
 
-1. **Discuss requirements** with the user
-   - What problem does this feature solve?
-   - What is the expected behaviour?
-   - What are the acceptance criteria?
+1. **ALWAYS discuss requirements** with the user
 
-2. **Break into vertical slices**
-   - Each slice delivers working functionality
-   - Slices are small enough to complete in one TDD cycle
-   - Order slices by dependency and value
+- What problem does this feature solve?
+- What is the expected behaviour?
+- What are the acceptance criteria?
 
-3. **Confirm understanding**
-   - Summarise back to the user
-   - Ask clarifying questions
-   - Agree on the first slice to implement
+2. STOP
 
-### Output
+- [ ] Have you asked the user at least one clarifying question
 
-```
-## Feature: [name]
+3. **Break into vertical slices**
 
-### Acceptance Criteria
-- [ ] Criterion 1
-- [ ] Criterion 2
+- Each slice delivers working functionality
+- Slices are small enough to complete in one TDD cycle
+- Order slices by dependency and value
 
-### Slices (in order)
-1. [First slice] — [why first]
-2. [Second slice] — [dependency on first]
-3. ...
+4. **Confirm understanding**
 
-### Starting with
-Slice 1: [description]
-```
+- Summarise back to the user
+- Ask clarifying questions
+- Agree on the first slice to implement
 
 ---
 
