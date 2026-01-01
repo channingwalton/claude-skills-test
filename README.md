@@ -5,7 +5,7 @@ Do your Claude Code skills and agents actually work?
 ## Purpose
 
 This project provides a repeatable test bed for measuring the effectiveness of different Claude Code skill and agent
-configurations. The goal is to count **interventions** (corrections, clarifications, or redirections) needed to complete the implementation.
+configurations. The goal is to count the corrections needed to complete the implementation.
 
 The [REQUIREMENTS](./REQUIREMENTS.md) are from an interview pairing exercise I used to use. The intent
 with a human developer was to have a conversation and see where things went, not to produce
@@ -39,7 +39,7 @@ mv ~/.claude.json ~/.claude.json.bak
 
 All [configuration](https://code.claude.com/docs/en/settings) for Claude should be added to your module only.
 
-Add a `README.md` to your project to describe the experiment, record your experiments in an `INTERVENTIONS.md` doc.
+Add a `README.md` to your project to describe the experiment, record your experiment in an `LOG.md` doc.
 You can add any observations there too.
 
 Add to the summary table below in this document.
@@ -49,6 +49,6 @@ rework to see how Claude copes with that.
 
 ## Experimental summary
 
-| Requirements version | Location | Description | Corrections | Language | Interventions log |
+| Requirements version | Location | Description | Corrections | Language | Log |
 |----------------------|--------------|-------------------|-------------|----------|-------------------|
-| 1                    | [vanilla-scala](/vanilla-scala/README.md) | No Claude config | 7 | Scala 3 | [Interventions](/vanilla-scala/INTERVENTIONS.md) |
+| 1                    | [vanilla-scala](/vanilla-scala/README.md) | No Claude config | 7 | Scala 3 | [Log](/vanilla-scala/LOG.md) |
