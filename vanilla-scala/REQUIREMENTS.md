@@ -1,5 +1,7 @@
 # Requirements
 
+Copied from the project [README](../README.md) with a few tweaks for Scala.
+
 ## Overview
 
 The goal is to create a model of a book and video library that supports the features described
@@ -9,7 +11,18 @@ below. Since its just a model, no database or UI is required.
 
 ### Project setup
 
-Add anything here to you asked Claude Code to do to set up the project.
+Instructions to Claude:
+
+```shell
+Add the required build files for a scala 3 project:
+  sbt: 1.11.7
+  scala 3.3.7
+  libs: munit 1.2.1
+```
+
+```shell
+add a suitable .gitignore for a scala project
+```
 
 ### Add books to the library
 
