@@ -56,9 +56,20 @@ case class Library(
       Right(copy(withdrawnBooks = updatedWithdrawn))
     else Left(NotWithdrawnByMember(book, member))
 
-  def searchByTitle(query: String): Either[SearchError, List[Book]] =
+  private def searchBooks(query: String, field: Book => String): Either[SearchError, List[Book]] =
     val nonWhitespaceCount = query.filterNot(_.isWhitespace).length
     if nonWhitespaceCount < 3 then Left(SearchQueryTooShort(query, 3))
     else
       val lowerQuery = query.toLowerCase
-      Right(books.keys.filter(_.title.toLowerCase.contains(lowerQuery)).toList)
+      Right(books.keys.filter(book => field(book).toLowerCase.contains(lowerQuery)).toList)
+
+  def searchByTitle(query: String): Either[SearchError, List[Book]] =
+    searchBooks(query, _.title)
+
+  def searchByAuthor(query: String): Either[SearchError, List[Book]] =
+    searchBooks(query, _.author)
+
+  def searchByIsbn(query: String): Either[SearchError, List[Book]] =
+    val normalized = query.toLowerCase.stripPrefix("isbn").filter(_.isDigit)
+    if normalized.length < 3 then Left(SearchQueryTooShort(query, 3))
+    else Right(books.keys.filter(_.isbn.filter(_.isDigit).contains(normalized)).toList)

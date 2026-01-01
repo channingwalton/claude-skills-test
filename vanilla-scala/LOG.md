@@ -1,6 +1,6 @@
 # Log
 
-**Total Corrections**: 8
+**Total Corrections**: 9
 
 ## First Task - mutable collections
 
@@ -56,9 +56,14 @@ Outcome: Success
 
 **Correction**: create an ADT of LibraryError to avoid functions returning union types
 
+### Search
+
+Correction: eliminate the duplication between searchByTitle and searchByAuthor
+
 ## Observations
 
 - Claude did not write tests unless I told it to.
 - Claude used mutable collections by default - this is Scala!
-- Claude put tests in a weird place.
-- I am making clarifications which I'll add to the main project. Its tricky to write generic requirements for any language.
+- Claude put tests in the wrong test class.
+- Claude did not recognise duplication, it just copy and pasted.
+- No Test Driven Development

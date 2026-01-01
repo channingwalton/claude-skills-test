@@ -252,3 +252,77 @@ class LibrarySuite extends munit.FunSuite:
     val library = Library().addBook(book)
     val result = library.searchByTitle("Brave")
     assertEquals(result, Right(List.empty))
+
+  test("searchByAuthor finds books by substring"):
+    val book1 = Book("1984", "George Orwell", "978-0451524935")
+    val book2 = Book("Brave New World", "Aldous Huxley", "978-0060850524")
+    val library = Library()
+      .addBook(book1)
+      .addBook(book2)
+    val result = library.searchByAuthor("Orwell")
+    assertEquals(result.map(_.toSet), Right(Set(book1)))
+
+  test("searchByAuthor is case insensitive"):
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library().addBook(book)
+    assertEquals(library.searchByAuthor("orwell").map(_.toSet), Right(Set(book)))
+    assertEquals(library.searchByAuthor("ORWELL").map(_.toSet), Right(Set(book)))
+    assertEquals(library.searchByAuthor("oRwElL").map(_.toSet), Right(Set(book)))
+
+  test("searchByAuthor returns error for query with fewer than 3 non-whitespace characters"):
+    val library = Library()
+    assertEquals(library.searchByAuthor("ab"), Left(SearchQueryTooShort("ab", 3)))
+    assertEquals(library.searchByAuthor("a b"), Left(SearchQueryTooShort("a b", 3)))
+    assertEquals(library.searchByAuthor("  ab  "), Left(SearchQueryTooShort("  ab  ", 3)))
+
+  test("searchByAuthor accepts query with exactly 3 non-whitespace characters"):
+    val book = Book("The Cat in the Hat", "Dr. Seuss", "978-0394800011")
+    val library = Library().addBook(book)
+    val result = library.searchByAuthor("Dr.")
+    assertEquals(result.map(_.toSet), Right(Set(book)))
+
+  test("searchByAuthor returns empty list when no books match"):
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library().addBook(book)
+    val result = library.searchByAuthor("Huxley")
+    assertEquals(result, Right(List.empty))
+
+  test("searchByIsbn finds books by digit substring"):
+    val book1 = Book("1984", "George Orwell", "978-0451524935")
+    val book2 = Book("Brave New World", "Aldous Huxley", "978-0060850524")
+    val library = Library()
+      .addBook(book1)
+      .addBook(book2)
+    val result = library.searchByIsbn("524935")
+    assertEquals(result.map(_.toSet), Right(Set(book1)))
+
+  test("searchByIsbn ignores ISBN prefix"):
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library().addBook(book)
+    assertEquals(library.searchByIsbn("ISBN524935").map(_.toSet), Right(Set(book)))
+    assertEquals(library.searchByIsbn("isbn524935").map(_.toSet), Right(Set(book)))
+    assertEquals(library.searchByIsbn("Isbn524935").map(_.toSet), Right(Set(book)))
+
+  test("searchByIsbn ignores non-digit characters"):
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library().addBook(book)
+    assertEquals(library.searchByIsbn("524-935").map(_.toSet), Right(Set(book)))
+    assertEquals(library.searchByIsbn("5 2 4 9 3 5").map(_.toSet), Right(Set(book)))
+
+  test("searchByIsbn returns error for query with fewer than 3 digits"):
+    val library = Library()
+    assertEquals(library.searchByIsbn("12"), Left(SearchQueryTooShort("12", 3)))
+    assertEquals(library.searchByIsbn("1-2"), Left(SearchQueryTooShort("1-2", 3)))
+    assertEquals(library.searchByIsbn("ISBN12"), Left(SearchQueryTooShort("ISBN12", 3)))
+
+  test("searchByIsbn accepts query with exactly 3 digits"):
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library().addBook(book)
+    val result = library.searchByIsbn("978")
+    assertEquals(result.map(_.toSet), Right(Set(book)))
+
+  test("searchByIsbn returns empty list when no books match"):
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library().addBook(book)
+    val result = library.searchByIsbn("999")
+    assertEquals(result, Right(List.empty))
