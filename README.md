@@ -16,7 +16,8 @@ So the features are fairly vague but that is kind of the point, lets see where y
 ### Important
 
 Let Claude Code do all the coding. Although that isn't realistic in normal development, the aim is to
-see where you and Claude Code take it, and how many corrections you had to make to achieve the vision.
+see where you and Claude Code take it, how many corrections you had to make to achieve the vision,
+and whether your SKILLS and Agents made any difference.
 
 ## The Task: A Book Library
 
