@@ -27,9 +27,10 @@ The features are described in [REQUIREMENTS.md](./REQUIREMENTS.md).
 
 ## Contributing
 
-`main` contains the template, add experiments to new directories.
+Add a module for your experiment.
 
-To ensure no contamination, your own Claude configuration should be temporarily put to one side:
+To ensure no contamination, your own Claude configuration should be temporarily
+put to one side:
 
 ```shell
 mv ~/.claude ~/.claude.bak
@@ -38,18 +39,13 @@ mv ~/.claude.json ~/.claude.json.bak
 
 All [configuration](https://code.claude.com/docs/en/settings) for Claude should be added to your module only.
 
-Add a `README.md` to your project to describe the experiment, record your experiments in an INTERVENTIONS.md doc, and submit a pull request.
+Add a `README.md` to your project to describe the experiment, record your experiments in an `INTERVENTIONS.md` doc.
+You can add any observations there too.
 
-Finally, add to the summary table below.
+Add to the summary table below in this document.
 
 You are free to work through the requirements in any way you like, but I've ordered the features to force some
 rework to see how Claude copes with that.
-
-## Success criteria
-
-- Fully tested
-- All tests pass
-- Conventional commits with meaningful messages
 
 ## Experimental summary
 
