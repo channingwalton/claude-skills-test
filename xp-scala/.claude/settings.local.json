@@ -2,8 +2,9 @@
   "permissions": {
     "allow": [
       "Skill(xp)",
-      "Bash(sbt --error test:*)",
-      "Bash(git)*"
+      "Bash(git)*",
+      "Skill(development)",
+      "Bash(sbt:*)"
     ]
   }
 }

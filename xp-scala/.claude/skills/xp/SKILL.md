@@ -75,8 +75,8 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 ### Commit Points
 
-- After each passing test (optional, small commits)
-- After completing a slice (recommended)
+- After each passing test
+- After completing a slice
 - After refactoring session
 
 ---
