@@ -5,7 +5,7 @@
 The goal is to create a model of a book and video library that supports the features described
 below. Since its just a model, no database or UI is required.
 
-## Features version 1
+## Features version 2
 
 ### Project setup
 
@@ -16,7 +16,24 @@ Add anything here to you asked Claude Code to do to set up the project.
 - Create a Library that contains a collection of Books.
 - A book has a title, author, and ISBN.
 
-Use the package `claude.skills`
+### Search for books by title substring
+
+- Substring search by title
+- Case insensitive
+- Minimum search string length 3, non-whitespace, characters
+
+### Search for books by author
+
+- Substring search by author
+- Case insensitive
+- Minimum search string length 3, non-whitespace, characters
+
+### Search for books by ISBN substring
+
+- Substring search by ISBN
+- Ignore `ISBN` prefix
+- Ignore any non-digit characters
+- Minimum search string length 3
 
 ### Add Members
 
