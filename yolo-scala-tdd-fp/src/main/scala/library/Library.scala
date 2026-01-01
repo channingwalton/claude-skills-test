@@ -1,6 +1,6 @@
 package library
 
-case class Library(books: List[Book]):
+case class Library(books: List[Book], members: List[Member] = List.empty):
   def addBook(book: Book): Library =
     copy(books = books :+ book)
 
@@ -27,6 +27,21 @@ case class Library(books: List[Book]):
     else
       val lowerQuery = query.toLowerCase
       Right(books.filter(book => field(book).toLowerCase.contains(lowerQuery)))
+
+  def addMember(member: Member): Either[MemberError, Library] =
+    if members.contains(member) then
+      Left(MemberError.MemberAlreadyExists)
+    else
+      Right(copy(members = members :+ member))
+
+  def removeMember(member: Member): Either[MemberError, Library] =
+    if !members.contains(member) then
+      Left(MemberError.MemberNotFound)
+    else
+      Right(copy(members = members.filterNot(_ == member)))
+
+  def findMemberByName(name: String): Option[Member] =
+    members.find(_.name == name)
 
 object Library:
   val empty: Library = Library(books = List.empty)
