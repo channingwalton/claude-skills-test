@@ -18,3 +18,8 @@ class Library:
     val trimmedQuery = query.replaceAll("\\s", "")
     if trimmedQuery.length < 3 then Seq.empty
     else _books.filter(_.author.toLowerCase.contains(query.trim.toLowerCase)).toSeq
+
+  def searchByIsbn(query: String): Seq[Book] =
+    val digitsOnly = query.toLowerCase.replaceFirst("^isbn", "").replaceAll("[^0-9]", "")
+    if digitsOnly.length < 3 then Seq.empty
+    else _books.filter(_.isbn.replaceAll("[^0-9]", "").contains(digitsOnly)).toSeq

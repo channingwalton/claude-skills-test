@@ -70,3 +70,35 @@ class LibrarySpec extends FunSuite:
     assertEquals(library.searchByAuthor("To").size, 0)
     assertEquals(library.searchByAuthor("  To  ").size, 0)
     assertEquals(library.searchByAuthor("Tol").size, 1)
+
+  // Search by ISBN tests
+  test("search by ISBN finds books with matching digit substring"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    val dune = Book("Dune", "Frank Herbert", "978-0-441-17271-9")
+    library.addBook(hobbit)
+    library.addBook(dune)
+    val results = library.searchByIsbn("102954")
+    assertEquals(results.size, 1)
+    assertEquals(results.head, hobbit)
+
+  test("search by ISBN ignores ISBN prefix"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addBook(hobbit)
+    assertEquals(library.searchByIsbn("ISBN 978").size, 1)
+    assertEquals(library.searchByIsbn("isbn978").size, 1)
+
+  test("search by ISBN ignores non-digit characters in query"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addBook(hobbit)
+    assertEquals(library.searchByIsbn("978-0-261").size, 1)
+    assertEquals(library.searchByIsbn("978 0 261").size, 1)
+
+  test("search by ISBN requires minimum 3 digit characters"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addBook(hobbit)
+    assertEquals(library.searchByIsbn("97").size, 0)
+    assertEquals(library.searchByIsbn("978").size, 1)
