@@ -189,3 +189,47 @@ class LibrarySpec extends FunSuite:
     library.withdrawBook(alice, hobbit)
     assertEquals(library.getBooksForMember(alice).size, 1)
     assertEquals(library.getBooksForMember(alice).head, hobbit)
+
+  // Return tests
+  test("a member can return a book they withdrew"):
+    val library = Library()
+    val alice = Member("Alice")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addBook(hobbit)
+    library.withdrawBook(alice, hobbit)
+    val result = library.returnBook(alice, hobbit)
+    assertEquals(result, true)
+
+  test("a member can only return a book if they withdrew it"):
+    val library = Library()
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addMember(bob)
+    library.addBook(hobbit)
+    library.withdrawBook(alice, hobbit)
+    val result = library.returnBook(bob, hobbit)
+    assertEquals(result, false)
+
+  test("a member can only return a book once"):
+    val library = Library()
+    val alice = Member("Alice")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addBook(hobbit)
+    library.withdrawBook(alice, hobbit)
+    library.returnBook(alice, hobbit)
+    val result = library.returnBook(alice, hobbit)
+    assertEquals(result, false)
+
+  test("a member's book list should not contain the book they returned"):
+    val library = Library()
+    val alice = Member("Alice")
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addMember(alice)
+    library.addBook(hobbit)
+    library.withdrawBook(alice, hobbit)
+    library.returnBook(alice, hobbit)
+    assertEquals(library.getBooksForMember(alice).size, 0)

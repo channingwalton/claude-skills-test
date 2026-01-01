@@ -45,3 +45,10 @@ class Library:
 
   def getBooksForMember(member: Member): Seq[Book] =
     _withdrawals.filter(_._2 == member).keys.toSeq
+
+  def returnBook(member: Member, book: Book): Boolean =
+    _withdrawals.get(book) match
+      case Some(m) if m == member =>
+        _withdrawals -= book
+        true
+      case _ => false
