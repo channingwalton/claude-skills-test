@@ -43,3 +43,30 @@ class LibrarySpec extends FunSuite:
     assertEquals(library.searchByTitle("Th").size, 0)
     assertEquals(library.searchByTitle("  Th  ").size, 0)
     assertEquals(library.searchByTitle("The").size, 1)
+
+  // Search by author tests
+  test("search by author finds books with matching substring"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    val dune = Book("Dune", "Frank Herbert", "978-0-441-17271-9")
+    library.addBook(hobbit)
+    library.addBook(dune)
+    val results = library.searchByAuthor("Tolkien")
+    assertEquals(results.size, 1)
+    assertEquals(results.head, hobbit)
+
+  test("search by author is case insensitive"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addBook(hobbit)
+    assertEquals(library.searchByAuthor("tolkien").size, 1)
+    assertEquals(library.searchByAuthor("TOLKIEN").size, 1)
+    assertEquals(library.searchByAuthor("ToLkIeN").size, 1)
+
+  test("search by author requires minimum 3 non-whitespace characters"):
+    val library = Library()
+    val hobbit = Book("The Hobbit", "J.R.R. Tolkien", "978-0-261-10295-4")
+    library.addBook(hobbit)
+    assertEquals(library.searchByAuthor("To").size, 0)
+    assertEquals(library.searchByAuthor("  To  ").size, 0)
+    assertEquals(library.searchByAuthor("Tol").size, 1)

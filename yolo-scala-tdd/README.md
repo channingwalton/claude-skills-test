@@ -11,3 +11,5 @@ There are no corrections in this example, I wanted to have an example of what vi
 would produce.
 
 See my observations [here](./LOG.md#observations).
+
+Look at the commit history for files in this directory to see how Claude worked through the problem.

@@ -13,3 +13,8 @@ class Library:
     val trimmedQuery = query.replaceAll("\\s", "")
     if trimmedQuery.length < 3 then Seq.empty
     else _books.filter(_.title.toLowerCase.contains(query.trim.toLowerCase)).toSeq
+
+  def searchByAuthor(query: String): Seq[Book] =
+    val trimmedQuery = query.replaceAll("\\s", "")
+    if trimmedQuery.length < 3 then Seq.empty
+    else _books.filter(_.author.toLowerCase.contains(query.trim.toLowerCase)).toSeq
