@@ -11,6 +11,9 @@ case class AlreadyWithdrawn(book: Book) extends WithdrawError
 sealed trait ReturnError extends LibraryError
 case class NotWithdrawnByMember(book: Book, member: Member) extends ReturnError
 
+sealed trait SearchError extends LibraryError
+case class SearchQueryTooShort(query: String, minLength: Int) extends SearchError
+
 case class Library(
     books: Map[Book, Int] = Map.empty,
     members: Set[Member] = Set.empty,
@@ -52,3 +55,10 @@ case class Library(
       val updatedWithdrawn = if updatedHolders.isEmpty then withdrawnBooks - book else withdrawnBooks + (book -> updatedHolders)
       Right(copy(withdrawnBooks = updatedWithdrawn))
     else Left(NotWithdrawnByMember(book, member))
+
+  def searchByTitle(query: String): Either[SearchError, List[Book]] =
+    val nonWhitespaceCount = query.filterNot(_.isWhitespace).length
+    if nonWhitespaceCount < 3 then Left(SearchQueryTooShort(query, 3))
+    else
+      val lowerQuery = query.toLowerCase
+      Right(books.keys.filter(_.title.toLowerCase.contains(lowerQuery)).toList)

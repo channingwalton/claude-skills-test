@@ -218,3 +218,37 @@ class LibrarySuite extends munit.FunSuite:
       .addBook(book)
     val result = library.returnBook(nonMember, book)
     assertEquals(result, Left(MemberNotFound(nonMember)))
+
+  test("searchByTitle finds books by substring"):
+    val book1 = Book("1984", "George Orwell", "978-0451524935")
+    val book2 = Book("Brave New World", "Aldous Huxley", "978-0060850524")
+    val library = Library()
+      .addBook(book1)
+      .addBook(book2)
+    val result = library.searchByTitle("Brave")
+    assertEquals(result.map(_.toSet), Right(Set(book2)))
+
+  test("searchByTitle is case insensitive"):
+    val book = Book("Brave New World", "Aldous Huxley", "978-0060850524")
+    val library = Library().addBook(book)
+    assertEquals(library.searchByTitle("brave").map(_.toSet), Right(Set(book)))
+    assertEquals(library.searchByTitle("BRAVE").map(_.toSet), Right(Set(book)))
+    assertEquals(library.searchByTitle("bRaVe").map(_.toSet), Right(Set(book)))
+
+  test("searchByTitle returns error for query with fewer than 3 non-whitespace characters"):
+    val library = Library()
+    assertEquals(library.searchByTitle("ab"), Left(SearchQueryTooShort("ab", 3)))
+    assertEquals(library.searchByTitle("a b"), Left(SearchQueryTooShort("a b", 3)))
+    assertEquals(library.searchByTitle("  ab  "), Left(SearchQueryTooShort("  ab  ", 3)))
+
+  test("searchByTitle accepts query with exactly 3 non-whitespace characters"):
+    val book = Book("The Cat in the Hat", "Dr. Seuss", "978-0394800011")
+    val library = Library().addBook(book)
+    val result = library.searchByTitle("Cat")
+    assertEquals(result.map(_.toSet), Right(Set(book)))
+
+  test("searchByTitle returns empty list when no books match"):
+    val book = Book("1984", "George Orwell", "978-0451524935")
+    val library = Library().addBook(book)
+    val result = library.searchByTitle("Brave")
+    assertEquals(result, Right(List.empty))

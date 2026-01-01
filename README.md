@@ -50,6 +50,6 @@ rework to see how Claude copes with that.
 
 ## Experimental summary
 
-| Requirements version | Location | Description | Corrections | Language | Log |
-|----------------------|--------------|-------------------|-------------|----------|-------------------|
-| 1                    | [vanilla-scala](/vanilla-scala/README.md) | No Claude config | 7 | Scala 3 | [Log](/vanilla-scala/LOG.md) |
+| Requirements version | Location | Description | Corrections | Language | Log | Model |
+|----------------------|--------------|-------------------|-------------|----------|-------------------|-----|
+| 1                    | [vanilla-scala](/vanilla-scala/README.md) | No Claude config | 7 | Scala 3 | [Log](/vanilla-scala/LOG.md) | Opus 4.5 |

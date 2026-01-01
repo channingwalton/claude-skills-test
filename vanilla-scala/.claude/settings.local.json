@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sbt compile:*)",
+      "Bash(sbt test:*)"
+    ]
+  }
+}
