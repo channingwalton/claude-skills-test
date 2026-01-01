@@ -1,5 +1,7 @@
 # Requirements
 
+COPY this into your module.
+
 ## Overview
 
 The goal is to create a model of a book and video library that supports the features described

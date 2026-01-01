@@ -1,5 +1,7 @@
 # Intervention Log
 
+COPY this into your module.
+
 ## Summary
 
 | Category | Count |
@@ -28,4 +30,3 @@
 ### What Needed Improvement
 
 ### Skill/Agent Issues Noted
-
