@@ -54,6 +54,6 @@ rework to see how Claude copes with that.
 |----------------------|--------------|-------------------|-------------|----------|-------------------|-----|
 | 2 | [vanilla-scala](/vanilla-scala/README.md) | No Claude config, feature by feature | 9 | Scala 3 | [Log](/vanilla-scala/LOG.md) | Opus 4.5 |
 | 2 | [yolo-scala](/yolo-scala/README.md) | No Claude config, one-shot | N/A | Scala 3 | [Log](/yolo-scala/LOG.md) | Opus 4.5 |
-| 2 | [yolo-scala-fp](./yolo-scala-fp/README.md) | Basic [CLAUDE.md](./yolo-scala-fp/CLAUDE.md) for functional programming, one-shot | - | Scala 3 | [Log](./yolo-scala-fp/LOG.md) | Opus 4.5 |
-| 2 | [yolo-scala-tdd](./yolo-scala-tdd/README.md) | Basic [CLAUDE.md](./yolo-scala-tdd/CLAUDE.md) for Test Driven Development, one-shot | - | Scala 3 | [Log](./yolo-scala-tdd/LOG.md) | Opus 4.5 |
-| 2 | [yolo-scala-tdd-fp](./yolo-scala-tdd-fp/README.md) | Basic [CLAUDE.md](./yolo-scala-tdd-fp/CLAUDE.md) for Test Driven Development with Functional Programming, one-shot | - | Scala 3 | [Log](./yolo-scala-tdd-fp/LOG.md) | Opus 4.5 |
+| 2 | [yolo-scala-fp](./yolo-scala-fp/README.md) | Basic [CLAUDE.md](./yolo-scala-fp/CLAUDE.md) for functional programming, one-shot | N/A | Scala 3 | [Log](./yolo-scala-fp/LOG.md) | Opus 4.5 |
+| 2 | [yolo-scala-tdd](./yolo-scala-tdd/README.md) | Basic [CLAUDE.md](./yolo-scala-tdd/CLAUDE.md) for Test Driven Development, one-shot | N/A | Scala 3 | [Log](./yolo-scala-tdd/LOG.md) | Opus 4.5 |
+| 2 | [yolo-scala-tdd-fp](./yolo-scala-tdd-fp/README.md) | Basic [CLAUDE.md](./yolo-scala-tdd-fp/CLAUDE.md) for Test Driven Development with Functional Programming, one-shot | N/A | Scala 3 | [Log](./yolo-scala-tdd-fp/LOG.md) | Opus 4.5 |
