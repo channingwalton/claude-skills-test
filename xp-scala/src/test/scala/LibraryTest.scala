@@ -21,3 +21,28 @@ class LibraryTest extends munit.FunSuite:
       lib2 <- lib1.addBook(book2)
     yield lib2
     assertEquals(result, Right(Library(List(book1, book2))))
+
+  test("searchByTitle finds books with matching substring"):
+    val library = Library(List(book1, book2))
+    val result = library.searchByTitle("Pragmatic")
+    assertEquals(result, Right(List(book1)))
+
+  test("searchByTitle returns empty list when no matches"):
+    val library = Library(List(book1, book2))
+    val result = library.searchByTitle("Nonexistent")
+    assertEquals(result, Right(List.empty[Book]))
+
+  test("searchByTitle is case-insensitive"):
+    val library = Library(List(book1, book2))
+    val result = library.searchByTitle("pragmatic")
+    assertEquals(result, Right(List(book1)))
+
+  test("searchByTitle rejects query with fewer than 3 non-whitespace chars"):
+    val library = Library(List(book1, book2))
+    val result = library.searchByTitle("ab")
+    assertEquals(result, Left(LibraryError.QueryTooShort))
+
+  test("searchByTitle counts only non-whitespace chars for minimum length"):
+    val library = Library(List(book1, book2))
+    val result = library.searchByTitle("  ab  ")
+    assertEquals(result, Left(LibraryError.QueryTooShort))
