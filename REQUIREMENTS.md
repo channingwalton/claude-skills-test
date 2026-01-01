@@ -7,7 +7,7 @@ of tracking what we are doing.
 
 ## Overview
 
-The goal is to create a model of a book and video library that supports the features described
+The goal is to create a model of a book library that supports the features described
 below. Since its just a model, no database or UI is required.
 
 ## Features
@@ -80,4 +80,4 @@ Tests:
 - Add multiple copies to the library
 - The library knows how many copies of a book it has
 - Members can only withdraw a book if there is a copy available
-- The number of available copies for withdrawal should account for withdrawals
+- The number of available copies for withdrawal should be accounted for when withdrawing
