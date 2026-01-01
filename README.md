@@ -56,3 +56,4 @@ rework to see how Claude copes with that.
 
 | Location | Description | Corrections | Language |
 |----------|-------------|-------------|----------|
+| [vanilla-scala](/vanilla-scala/README.md)| No Claude config | 7 | Scala 3 |
