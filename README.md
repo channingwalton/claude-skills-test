@@ -1,19 +1,29 @@
 # Claude Code Skills and Agents Tests
 
-A small project for evaluating Claude Code skills and agents.
+Do your Claude Code skills and agents actually work?
 
 ## Purpose
 
 This project provides a repeatable test bed for measuring the effectiveness of different Claude Code skill and agent
-configurations. The goal is to count **interventions** (corrections, clarifications, or redirections) needed to complete
-the implementation.
+configurations. The goal is to count **interventions** (corrections, clarifications, or redirections) needed to complete the implementation.
 
-## The Task: A Library for Books and Movies
+The [REQUIREMENTS](./REQUIREMENTS.md) are from an interview pairing exercise I used to use. The intent
+with a human developer was to have a conversation and see where things went, not to produce
+my idea of a perfect solution.
 
-Implement an in-memory model of a library that supports adding, removing, and searching for books and movies in any
-language you like.
+So the features are fairly vague but that is kind of the point, lets see where your solution goes.
 
-The features are described in [REQUIREMENTS.md](REQUIREMENTS.md).
+### Important
+
+Let Claude Code do all the coding. Although that isn't realistic in normal development, the aim is to
+see where you and Claude Code take it, and how many corrections you had to make to achieve the vision.
+
+## The Task: A Book Library
+
+Implement an in-memory model of a library that supports adding, removing,
+searching, withdrawing, and returning books, in any language you like.
+
+The features are described in [REQUIREMENTS.md](./REQUIREMENTS.md).
 
 ## Contributing
 
@@ -28,7 +38,7 @@ mv ~/.claude.json ~/.claude.json.bak
 
 All [configuration](https://code.claude.com/docs/en/settings) for Claude should be added to your module only.
 
-Add a [README.md](README.md) to your project to describe the experiment, record your experiments in an INTERVENTIONS.md doc, and submit a pull request.
+Add a `README.md` to your project to describe the experiment, record your experiments in an INTERVENTIONS.md doc, and submit a pull request.
 
 Finally, add to the summary table below.
 
