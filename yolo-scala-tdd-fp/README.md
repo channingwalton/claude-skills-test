@@ -11,3 +11,7 @@ There are no corrections in this example, I wanted to have an example of what vi
 would produce.
 
 See my observations [here](./LOG.md#observations).
+
+## Claude's Implementation
+
+View the complete implementation: [b5ab27c...b66ab4d](https://github.com/channingwalton/claude-skills-test/compare/b5ab27c...b66ab4d)

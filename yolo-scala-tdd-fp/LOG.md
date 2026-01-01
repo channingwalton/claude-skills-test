@@ -16,3 +16,4 @@
 - Used proper return types for errors (`Either`)
 - Eliminated duplication in search functions without prompting
 - Loans caused more complexity than other solutions required with a Loan type
+- Unnecessary code due to poor use of collections. eg. `Library.returnBook`
