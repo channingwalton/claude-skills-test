@@ -2,20 +2,23 @@
 
 ## Overview
 
-The goal is to create a model of a library that supports the features described
+The goal is to create a model of a book and video library that supports the features described
 below. Since its just a model, no database or UI is required.
 
 ## Features
 
 ### Project setup
 
-TODO: Add anything here to tell Claude how to set up your project
+Add anything here to you asked Claude Code to do to set up the project.
 
 ### Add books to the library
 
-A book has a title, author, and ISBN.
+- Create a Library that contains books.
+- A book has a title, author, and ISBN.
 
-### Members
+Use the package `claude.skills`
+
+### Add Members
 
 Members have names, the library has members, members can be added and removed.
 
