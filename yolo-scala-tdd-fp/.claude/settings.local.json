@@ -3,7 +3,8 @@
     "allow": [
       "Bash(sbt test:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd search by title functionality\n\n- Substring search \\(case-insensitive\\)\n- Minimum 3 non-whitespace characters required\n- Returns Either[SearchError, List[Book]] for FP error handling\n- SearchError ADT for query validation errors\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd search by title functionality\n\n- Substring search \\(case-insensitive\\)\n- Minimum 3 non-whitespace characters required\n- Returns Either[SearchError, List[Book]] for FP error handling\n- SearchError ADT for query validation errors\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd search by author functionality\n\n- Substring search \\(case-insensitive\\)\n- Minimum 3 non-whitespace characters required\n- Refactored to share common search logic with searchByTitle\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }

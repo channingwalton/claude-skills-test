@@ -86,3 +86,38 @@ class LibraryTest extends FunSuite:
     val result = library.searchByTitle("xyz")
 
     assertEquals(result, Right(List.empty))
+
+  // Search by author tests
+  test("Search by author returns matching books (substring match)"):
+    val book1 = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val book2 = Book("Refactoring", "Martin Fowler", "978-0134757599")
+    val book3 = Book("Code Complete", "Steve McConnell", "978-0735619678")
+    val library = Library(books = List(book1, book2, book3))
+
+    val result = library.searchByAuthor("Martin")
+
+    assertEquals(result, Right(List(book1, book2)))
+
+  test("Search by author is case insensitive"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByAuthor("robert")
+
+    assertEquals(result, Right(List(book)))
+
+  test("Search by author fails with less than 3 non-whitespace characters"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByAuthor("ab")
+
+    assertEquals(result, Left(SearchError.QueryTooShort))
+
+  test("Search by author returns empty list when no matches"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByAuthor("xyz")
+
+    assertEquals(result, Right(List.empty))
