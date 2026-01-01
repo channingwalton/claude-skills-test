@@ -60,5 +60,12 @@ case class Library(
   def getBooksForMember(member: Member): List[Book] =
     loans.filter(_.member == member).map(_.book)
 
+  def returnBook(member: Member, book: Book): Either[ReturnError, Library] =
+    val loan = Loan(member, book)
+    if !loans.contains(loan) then
+      Left(ReturnError.BookNotBorrowedByMember)
+    else
+      Right(copy(loans = loans.filterNot(_ == loan)))
+
 object Library:
   val empty: Library = Library(books = List.empty)
