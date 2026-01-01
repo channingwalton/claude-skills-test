@@ -12,4 +12,5 @@
 - Ran the test which passed
 - Committing!
 - Continued to follow TDD loop
-
+- Used case classes following FP principles
+- Used proper return types for errors (`Either`)
