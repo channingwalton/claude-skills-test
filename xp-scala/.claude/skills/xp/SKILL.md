@@ -43,11 +43,11 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 - Slices are small enough to complete in one TDD cycle
 - Order slices by dependency and value
 
-4. **Confirm understanding**
+4. **STOP and Confirm understanding**
 
 - Summarise back to the user
 - Ask clarifying questions
-- Agree on the first slice to implement
+- **ALWAYS** Agree on the first slice to implement
 
 ---
 
