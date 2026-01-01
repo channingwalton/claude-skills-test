@@ -4,12 +4,21 @@
 
 ## Observations
 
+- General lack of functional programming
 - Claude created a TODO list
 - Did not observe standard Scala naming conventions (`_borrowedBooks`)
+- Naming conventions inconsistent in [Library](./src/main/scala/claude/skills/Library.scala)
 - Used mutable collections
+- Used a `var` in [Member](./src/main/scala/claude/skills/)
+- [Library](./src/main/scala/claude/skills/Library.scala) is a class rather than case class
+  - Member functions return `()` (mutation)
 - Created tests without being asked
 - Claude ran the 26 tests it wrote
-- Compiled and tests passed first time
+- Compiled and tests passed first Implementation
+- No error handling
+  - Returning empty collections instead of an error if search terms were invalid
+- Use of `require` in [Library.addBook](./src/main/scala/claude/skills/Library.scala)
+  - Not FP
 
 ## Claude's Implementation Summary
 

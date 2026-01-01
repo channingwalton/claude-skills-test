@@ -52,5 +52,5 @@ rework to see how Claude copes with that.
 
 | Requirements version | Location | Description | Corrections | Language | Log | Model |
 |----------------------|--------------|-------------------|-------------|----------|-------------------|-----|
-| 2 | [vanilla-scala](/vanilla-scala/README.md) | No Claude config | 9 | Scala 3 | [Log](/vanilla-scala/LOG.md) | Opus 4.5 |
-| 2 | [yolo-scala](/yolo-scala/README.md) | No Claude config | - | Scala 3 | [Log](/yolo-scala/LOG.md) | Opus 4.5 |
+| 2 | [vanilla-scala](/vanilla-scala/README.md) | No Claude config, feature by feature | 9 | Scala 3 | [Log](/vanilla-scala/LOG.md) | Opus 4.5 |
+| 2 | [yolo-scala](/yolo-scala/README.md) | No Claude config, one-shot | - | Scala 3 | [Log](/yolo-scala/LOG.md) | Opus 4.5 |
