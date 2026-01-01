@@ -55,20 +55,7 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 **Goal:** Implement the slice using strict TDD.
 
-**Invoke:** Switch to `development` skill or follow TDD cycle:
-
-```
-🔴 RED    → Write ONE failing test for the slice
-🟢 GREEN  → Write MINIMUM code to pass
-✅ VERIFY → Run tests, confirm all green
-```
-
-### Rules
-
-- One test at a time
-- Test must fail before writing production code
-- Write only enough code to pass the test
-- Do not skip to implementation
+**Invoke:** Switch to `development` skill
 
 ---
 
@@ -133,13 +120,13 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
           │                                          │
           ▼                                          │
      ┌────────┐    More slices?                      │
-     │ITERATE │ ───────────────────────────────────► │
-     └────┬───┘                                      │
-          │                                          │
-          ▼ Done                                     │
-     ┌────────┐                                      │
-     │  END   │                                      │
-     └────────┘                                      │
+     │ITERATE │ ───────────────────────────────────►─┘
+     └────┬───┘ 
+          │ 
+          ▼ Done
+     ┌────────┐
+     │  END   │
+     └────────┘ 
 ```
 
 ## Announcing Phase Transitions
