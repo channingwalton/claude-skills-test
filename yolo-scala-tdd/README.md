@@ -13,3 +13,5 @@ would produce.
 See my observations [here](./LOG.md#observations).
 
 Look at the commit history for files in this directory to see how Claude worked through the problem.
+
+Claude's implementation commits: [150229c](https://github.com/channingwalton/claude-skills-test/commit/150229c)...[fcba115](https://github.com/channingwalton/claude-skills-test/commit/fcba115) ([compare](https://github.com/channingwalton/claude-skills-test/compare/150229c...fcba115))
