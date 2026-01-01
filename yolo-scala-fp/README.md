@@ -1,6 +1,7 @@
 # Claude Skills and Agents Test Framework
 
-This experiment uses Claude Code with no modifications at all.
+This experiment uses Claude Code with a simple [CLAUDE.md](./CLAUDE.md) that asks
+for basic Scala 3 related things.
 
 Instead of feeding Claude with one task at a time, I asked it to implement the whole
 [REQUIREMENTS](./REQUIREMENTS.md) on its own.
