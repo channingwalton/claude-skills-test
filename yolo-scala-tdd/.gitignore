@@ -1,0 +1,22 @@
+# sbt
+target/
+project/target/
+project/project/
+
+# Metals / BSP
+.metals/
+.bloop/
+.bsp/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.class
+*.log
