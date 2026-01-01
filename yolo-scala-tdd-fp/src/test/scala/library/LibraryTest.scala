@@ -121,3 +121,61 @@ class LibraryTest extends FunSuite:
     val result = library.searchByAuthor("xyz")
 
     assertEquals(result, Right(List.empty))
+
+  // Search by ISBN tests
+  test("Search by ISBN returns matching books (substring match)"):
+    val book1 = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val book2 = Book("Refactoring", "Martin Fowler", "978-0134757599")
+    val library = Library(books = List(book1, book2))
+
+    val result = library.searchByIsbn("0132")
+
+    assertEquals(result, Right(List(book1)))
+
+  test("Search by ISBN ignores ISBN prefix in query"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByIsbn("ISBN 978-0132")
+
+    assertEquals(result, Right(List(book)))
+
+  test("Search by ISBN ignores non-digit characters in query"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByIsbn("978-013")
+
+    assertEquals(result, Right(List(book)))
+
+  test("Search by ISBN ignores non-digit characters in book ISBN"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByIsbn("9780132")
+
+    assertEquals(result, Right(List(book)))
+
+  test("Search by ISBN fails with less than 3 digits"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByIsbn("97")
+
+    assertEquals(result, Left(SearchError.QueryTooShort))
+
+  test("Search by ISBN with exactly 3 digits succeeds"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByIsbn("978")
+
+    assertEquals(result, Right(List(book)))
+
+  test("Search by ISBN returns empty list when no matches"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(books = List(book))
+
+    val result = library.searchByIsbn("999")
+
+    assertEquals(result, Right(List.empty))
