@@ -11,21 +11,22 @@ enum LibraryError:
   case BookNotHeld
 
 case class Library(
-    books: List[Book],
+    copies: Map[Book, Int] = Map.empty,
     members: List[Member] = List.empty,
-    withdrawals: Map[Book, List[Member]] = Map.empty,
-    copies: Map[Book, Int] = Map.empty
+    withdrawals: Map[Book, List[Member]] = Map.empty
 ):
+  def books: List[Book] = copies.keys.toList
+
   def addBook(book: Book): Either[LibraryError, Library] =
     if book.isbn.isBlank then Left(LibraryError.InvalidISBN)
     else
-      val existingBook = books.find(_.isbn == book.isbn)
+      val existingBook = copies.keys.find(_.isbn == book.isbn)
       existingBook match
         case Some(existing) =>
-          val currentCount = copies.getOrElse(existing, 1)
+          val currentCount = copies(existing)
           Right(copy(copies = copies + (existing -> (currentCount + 1))))
         case None =>
-          Right(copy(books = books :+ book, copies = copies + (book -> 1)))
+          Right(copy(copies = copies + (book -> 1)))
 
   def copiesOf(book: Book): Int =
     copies.getOrElse(book, 0)
@@ -44,9 +45,10 @@ case class Library(
 
   def withdraw(member: Member, book: Book): Either[LibraryError, Library] =
     val holders = withdrawals.getOrElse(book, List.empty)
+    val availableCopies = copiesOf(book) - holders.length
     if holders.contains(member) then Left(LibraryError.BookAlreadyHeld)
-    else if holders.nonEmpty then Left(LibraryError.BookUnavailable)
-    else Right(copy(withdrawals = withdrawals + (book -> List(member))))
+    else if availableCopies <= 0 then Left(LibraryError.BookUnavailable)
+    else Right(copy(withdrawals = withdrawals + (book -> (holders :+ member))))
 
   def booksFor(member: Member): List[Book] =
     withdrawals.collect { case (book, holders) if holders.contains(member) => book }.toList
@@ -75,4 +77,4 @@ case class Library(
     else Right(books.filter(field(_).toLowerCase.contains(query.toLowerCase)))
 
 object Library:
-  def empty: Library = Library(List.empty)
+  def empty: Library = Library()

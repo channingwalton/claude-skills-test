@@ -19,7 +19,7 @@ class LibrarySpec extends munit.FunSuite:
   test("adding a book with duplicate ISBN increments copy count but keeps original book data"):
     val book1 = Book("Clean Code", "Robert Martin", "978-0132350884")
     val book2 = Book("Different Title", "Different Author", "978-0132350884")
-    val library = Library(List(book1), copies = Map(book1 -> 1))
+    val library = Library(copies = Map(book1 -> 1))
 
     val result = library.addBook(book2)
 
@@ -29,7 +29,7 @@ class LibrarySpec extends munit.FunSuite:
   test("search by title returns matching books case insensitively"):
     val book1 = Book("The Pragmatic Programmer", "David Thomas", "978-0135957059")
     val book2 = Book("Clean Code", "Robert Martin", "978-0132350884")
-    val library = Library(List(book1, book2))
+    val library = Library(copies = Map(book1 -> 1, book2 -> 1))
 
     val result = library.searchByTitle("pragmatic")
 
@@ -44,7 +44,7 @@ class LibrarySpec extends munit.FunSuite:
 
   test("search with no matches returns empty list"):
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
-    val library = Library(List(book))
+    val library = Library(copies = Map(book -> 1))
 
     val result = library.searchByTitle("nonexistent")
 
@@ -53,7 +53,7 @@ class LibrarySpec extends munit.FunSuite:
   test("search by author returns matching books case insensitively"):
     val book1 = Book("The Pragmatic Programmer", "David Thomas", "978-0135957059")
     val book2 = Book("Clean Code", "Robert Martin", "978-0132350884")
-    val library = Library(List(book1, book2))
+    val library = Library(copies = Map(book1 -> 1, book2 -> 1))
 
     val result = library.searchByAuthor("martin")
 
@@ -61,7 +61,7 @@ class LibrarySpec extends munit.FunSuite:
 
   test("search by ISBN normalizes query and book ISBN to digits only"):
     val book = Book("Clean Code", "Robert Martin", "978-0-13-235088-4")
-    val library = Library(List(book))
+    val library = Library(copies = Map(book -> 1))
 
     val result = library.searchByISBN("978-013")
 
@@ -69,7 +69,7 @@ class LibrarySpec extends munit.FunSuite:
 
   test("search by ISBN strips ISBN prefix from query"):
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
-    val library = Library(List(book))
+    val library = Library(copies = Map(book -> 1))
 
     val result = library.searchByISBN("ISBN978")
 
@@ -92,7 +92,7 @@ class LibrarySpec extends munit.FunSuite:
 
   test("adding a member with same name is ignored"):
     val member = Member("Alice")
-    val library = Library(List.empty, List(member))
+    val library = Library(members = List(member))
 
     val result = library.addMember(member)
 
@@ -101,7 +101,7 @@ class LibrarySpec extends munit.FunSuite:
   test("find member by name returns matching members case insensitively"):
     val alice = Member("Alice Smith")
     val bob = Member("Bob Jones")
-    val library = Library(List.empty, List(alice, bob))
+    val library = Library(members = List(alice, bob))
 
     val result = library.findMemberByName("alice")
 
@@ -110,7 +110,7 @@ class LibrarySpec extends munit.FunSuite:
   test("removing a member results in library without that member"):
     val alice = Member("Alice")
     val bob = Member("Bob")
-    val library = Library(List.empty, List(alice, bob))
+    val library = Library(members = List(alice, bob))
 
     val result = library.removeMember(alice)
 
@@ -119,7 +119,7 @@ class LibrarySpec extends munit.FunSuite:
   test("removing a non-existent member returns error"):
     val alice = Member("Alice")
     val bob = Member("Bob")
-    val library = Library(List.empty, List(alice))
+    val library = Library(members = List(alice))
 
     val result = library.removeMember(bob)
 
@@ -128,7 +128,7 @@ class LibrarySpec extends munit.FunSuite:
   test("member can withdraw an available book"):
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
     val alice = Member("Alice")
-    val library = Library(List(book), List(alice))
+    val library = Library(copies = Map(book -> 1), members = List(alice))
 
     val result = library.withdraw(alice, book)
 
@@ -138,7 +138,7 @@ class LibrarySpec extends munit.FunSuite:
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
     val alice = Member("Alice")
     val bob = Member("Bob")
-    val library = Library(List(book), List(alice, bob), Map(book -> List(alice)))
+    val library = Library(copies = Map(book -> 1), members = List(alice, bob), withdrawals = Map(book -> List(alice)))
 
     val result = library.withdraw(bob, book)
 
@@ -147,7 +147,7 @@ class LibrarySpec extends munit.FunSuite:
   test("member cannot withdraw the same book twice"):
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
     val alice = Member("Alice")
-    val library = Library(List(book), List(alice), Map(book -> List(alice)))
+    val library = Library(copies = Map(book -> 1), members = List(alice), withdrawals = Map(book -> List(alice)))
 
     val result = library.withdraw(alice, book)
 
@@ -157,7 +157,7 @@ class LibrarySpec extends munit.FunSuite:
     val book1 = Book("Clean Code", "Robert Martin", "978-0132350884")
     val book2 = Book("The Pragmatic Programmer", "David Thomas", "978-0135957059")
     val alice = Member("Alice")
-    val library = Library(List(book1, book2), List(alice), Map(book1 -> List(alice)))
+    val library = Library(copies = Map(book1 -> 1, book2 -> 1), members = List(alice), withdrawals = Map(book1 -> List(alice)))
 
     val result = library.booksFor(alice)
 
@@ -166,7 +166,7 @@ class LibrarySpec extends munit.FunSuite:
   test("member can return a book they withdrew"):
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
     val alice = Member("Alice")
-    val library = Library(List(book), List(alice), Map(book -> List(alice)))
+    val library = Library(copies = Map(book -> 1), members = List(alice), withdrawals = Map(book -> List(alice)))
 
     val result = library.returnBook(alice, book)
 
@@ -177,7 +177,7 @@ class LibrarySpec extends munit.FunSuite:
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
     val alice = Member("Alice")
     val bob = Member("Bob")
-    val library = Library(List(book), List(alice, bob), Map(book -> List(alice)))
+    val library = Library(copies = Map(book -> 1), members = List(alice, bob), withdrawals = Map(book -> List(alice)))
 
     val result = library.returnBook(bob, book)
 
@@ -186,7 +186,7 @@ class LibrarySpec extends munit.FunSuite:
   test("cannot return book that isn't withdrawn"):
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
     val alice = Member("Alice")
-    val library = Library(List(book), List(alice))
+    val library = Library(copies = Map(book -> 1), members = List(alice))
 
     val result = library.returnBook(alice, book)
 
@@ -202,3 +202,32 @@ class LibrarySpec extends munit.FunSuite:
     yield lib2
 
     assertEquals(result.map(_.copiesOf(book)), Right(2))
+
+  test("two members can withdraw a book with two copies"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val library = Library(copies = Map(book -> 2), members = List(alice, bob))
+
+    val result = for
+      lib1 <- library.withdraw(alice, book)
+      lib2 <- lib1.withdraw(bob, book)
+    yield lib2
+
+    assertEquals(result.map(_.booksFor(alice)), Right(List(book)))
+    assertEquals(result.map(_.booksFor(bob)), Right(List(book)))
+
+  test("cannot withdraw when all copies are already withdrawn"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val charlie = Member("Charlie")
+    val library = Library(
+      copies = Map(book -> 2),
+      members = List(alice, bob, charlie),
+      withdrawals = Map(book -> List(alice, bob))
+    )
+
+    val result = library.withdraw(charlie, book)
+
+    assertEquals(result, Left(LibraryError.BookUnavailable))
