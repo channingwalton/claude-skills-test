@@ -17,7 +17,7 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 │  🔴 DEVELOP  → TDD cycle (red-green)                       │
 │  🔵 REFACTOR → Improve design (tests stay green)           │
 │  💾 COMMIT   → Save working state                          │
-│  🔁 ITERATE  → Next slice or feature complete              │
+│  🔁 ITERATE  → Next task or feature complete              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -37,23 +37,23 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 - [ ] Have you asked the user at least one clarifying question
 
-3. **Break into vertical slices**
+3. **Break into vertical tasks**
 
-- Each slice delivers working functionality
-- Slices are small enough to complete in one TDD cycle
-- Order slices by dependency and value
+- Each task delivers working functionality
+- tasks are small enough to complete in one TDD cycle
+- Order tasks by dependency and value
 
 4. **STOP and Confirm understanding**
 
 - Summarise back to the user
 - Ask clarifying questions
-- **ALWAYS** Agree on the first slice to implement
+- **ALWAYS** Agree on the first task to implement
 
 ---
 
 ## Phase 2: Development (🔴 DEVELOP)
 
-**Goal:** Implement the slice using strict TDD.
+**Goal:** Implement the task using strict TDD.
 
 **Invoke:** Switch to `development` skill
 
@@ -76,7 +76,7 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 ### Commit Points
 
 - After each passing test
-- After completing a slice
+- After completing a task
 - After refactoring session
 
 ---
@@ -85,11 +85,11 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 **Goal:** Continue until feature complete.
 
-1. Mark slice as done
-2. Review remaining slices
+1. Mark task as done
+2. Review remaining tasks
 3. Adjust plan if needed (new learnings)
-4. Return to Phase 2 for next slice
-5. When all slices complete → feature done
+4. Return to Phase 2 for next task
+5. When all tasks complete → feature done
 
 ---
 
@@ -119,7 +119,7 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
      └────┬───┘                                      │
           │                                          │
           ▼                                          │
-     ┌────────┐    More slices?                      │
+     ┌────────┐    More tasks?                      │
      │ITERATE │ ───────────────────────────────────►─┘
      └────┬───┘ 
           │ 
@@ -135,11 +135,11 @@ When switching phases, announce clearly:
 
 ```
 📋 PLAN → Starting feature discussion
-🔴 DEVELOP → Writing failing test for [slice]
+🔴 DEVELOP → Writing failing test for [task]
 🟢 DEVELOP → Making test pass
 🔵 REFACTOR → Improving [aspect]
-💾 COMMIT → Saving [slice] implementation
-🔁 ITERATE → Moving to next slice
+💾 COMMIT → Saving [task] implementation
+🔁 ITERATE → Moving to next task
 ✅ COMPLETE → Feature done
 ```
 
@@ -155,7 +155,7 @@ When switching phases, announce clearly:
 ## Core Principles (Always Apply)
 
 - **Communication first** — discuss before coding
-- **Small steps** — one slice, one test, one change at a time
+- **Small steps** — one task, one test, one change at a time
 - **Continuous feedback** — tests run constantly
 - **Simplicity** — implement only what's needed now
 - **Courage** — refactor fearlessly (tests protect you)

@@ -22,3 +22,4 @@ Add books to the library
 - Switched to Development skill
 - Development process followed TDD process
 - Iterated through slices
+- Commits after slice
