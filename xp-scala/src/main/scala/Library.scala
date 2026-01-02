@@ -7,6 +7,7 @@ enum LibraryError:
   case InvalidSearchQuery
   case NoSuchMember
   case BookUnavailable
+  case BookAlreadyHeld
 
 case class Library(
     books: List[Book],
@@ -31,8 +32,10 @@ case class Library(
     else Right(copy(members = members.filterNot(_.name == member.name)))
 
   def withdraw(member: Member, book: Book): Either[LibraryError, Library] =
-    if withdrawals.contains(book) then Left(LibraryError.BookUnavailable)
-    else Right(copy(withdrawals = withdrawals + (book -> member)))
+    withdrawals.get(book) match
+      case Some(holder) if holder == member => Left(LibraryError.BookAlreadyHeld)
+      case Some(_)                          => Left(LibraryError.BookUnavailable)
+      case None                             => Right(copy(withdrawals = withdrawals + (book -> member)))
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
