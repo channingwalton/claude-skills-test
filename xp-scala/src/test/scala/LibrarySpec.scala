@@ -6,4 +6,12 @@ class LibrarySpec extends munit.FunSuite:
 
     val result = emptyLibrary.addBook(book)
 
-    assertEquals(result.books, List(book))
+    assertEquals(result.map(_.books), Right(List(book)))
+
+  test("adding a book with blank ISBN returns an error"):
+    val book = Book("Some Title", "Some Author", "")
+    val library = Library.empty
+
+    val result = library.addBook(book)
+
+    assertEquals(result, Left(LibraryError.InvalidISBN))
