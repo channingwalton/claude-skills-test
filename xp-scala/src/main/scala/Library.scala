@@ -13,7 +13,8 @@ case class Library(books: List[Book], members: List[Member] = List.empty):
     else Right(copy(books = books :+ book))
 
   def addMember(member: Member): Library =
-    copy(members = members :+ member)
+    if members.exists(_.name == member.name) then this
+    else copy(members = members :+ member)
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)

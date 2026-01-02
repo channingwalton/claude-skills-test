@@ -88,3 +88,11 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.addMember(member)
 
     assertEquals(result.members, List(member))
+
+  test("adding a member with same name is ignored"):
+    val member = Member("Alice")
+    val library = Library(List.empty, List(member))
+
+    val result = library.addMember(member)
+
+    assertEquals(result.members, List(member))
