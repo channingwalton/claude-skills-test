@@ -80,3 +80,11 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.searchByISBN("ISBN-97")
 
     assertEquals(result, Left(LibraryError.InvalidSearchQuery))
+
+  test("adding a member to empty library results in library containing that member"):
+    val member = Member("Alice")
+    val library = Library.empty
+
+    val result = library.addMember(member)
+
+    assertEquals(result.members, List(member))

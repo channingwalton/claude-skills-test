@@ -1,14 +1,19 @@
 case class Book(title: String, author: String, isbn: String)
 
+case class Member(name: String)
+
 enum LibraryError:
   case InvalidISBN
   case InvalidSearchQuery
 
-case class Library(books: List[Book]):
+case class Library(books: List[Book], members: List[Member] = List.empty):
   def addBook(book: Book): Either[LibraryError, Library] =
     if book.isbn.isBlank then Left(LibraryError.InvalidISBN)
     else if books.exists(_.isbn == book.isbn) then Right(this)
-    else Right(Library(books :+ book))
+    else Right(copy(books = books :+ book))
+
+  def addMember(member: Member): Library =
+    copy(members = members :+ member)
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
