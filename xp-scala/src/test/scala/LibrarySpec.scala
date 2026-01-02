@@ -48,3 +48,12 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.searchByTitle("nonexistent")
 
     assertEquals(result, Right(List.empty))
+
+  test("search by author returns matching books case insensitively"):
+    val book1 = Book("The Pragmatic Programmer", "David Thomas", "978-0135957059")
+    val book2 = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(List(book1, book2))
+
+    val result = library.searchByAuthor("martin")
+
+    assertEquals(result, Right(List(book2)))
