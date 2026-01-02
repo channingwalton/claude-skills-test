@@ -40,6 +40,9 @@ case class Library(
   def booksFor(member: Member): List[Book] =
     withdrawals.collect { case (book, holder) if holder == member => book }.toList
 
+  def returnBook(member: Member, book: Book): Either[LibraryError, Library] =
+    Right(copy(withdrawals = withdrawals - book))
+
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
 

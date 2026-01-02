@@ -161,3 +161,13 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.booksFor(alice)
 
     assertEquals(result, List(book1))
+
+  test("member can return a book they withdrew"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val alice = Member("Alice")
+    val library = Library(List(book), List(alice), Map(book -> alice))
+
+    val result = library.returnBook(alice, book)
+
+    assertEquals(result.map(_.booksFor(alice)), Right(List.empty))
+    assertEquals(result.map(_.withdrawals.contains(book)), Right(false))
