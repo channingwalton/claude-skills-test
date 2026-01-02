@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(xp)",
+      "Bash(git)*",
+      "Skill(development)",
+      "Bash(sbt:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(mkdir -p:*)",
+      "Bash(git:*)",
+      "Skill(planning)"
+    ]
+  }
+}
