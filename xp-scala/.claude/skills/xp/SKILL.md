@@ -25,29 +25,7 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 **Goal:** Understand and decompose the feature before writing any code.
 
-### Steps
-
-1. **ALWAYS discuss requirements** with the user
-
-- What problem does this feature solve?
-- What is the expected behaviour?
-- What are the acceptance criteria?
-
-2. STOP
-
-- [ ] Have you asked the user at least one clarifying question
-
-3. **Break into vertical tasks**
-
-- Each task delivers working functionality
-- tasks are small enough to complete in one TDD cycle
-- Order tasks by dependency and value
-
-4. **STOP and Confirm understanding**
-
-- Summarise back to the user
-- Ask clarifying questions
-- **ALWAYS** Agree on the first task to implement
+**Invoke:** Switch to `planning` skill
 
 ---
 
@@ -65,16 +43,14 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 1. **Invoke:** Switch to `refactor` skill
 2. STOP
-
-- [ ] Ask the user if they want to see any other changes
-
+   - [ ] Ask the user if they want to see any other changes
 3. Ensure all tests pass before continuing
 
 ---
 
 ## Phase 4: Commit (💾 COMMIT)
 
-**Goal:** Save working state with clear commit message.
+**Goal:** Save working state with clear, simple, commit message.
 
 **Invoke:** Switch to `commit-helper` skill
 
@@ -98,42 +74,6 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 ---
 
-## Workflow Diagram
-
-```
-          ┌──────────────────────────────────────────┐
-          │                                          │
-          ▼                                          │
-     ┌────────┐                                      │
-     │  PLAN  │ ← Discuss, break down, confirm       │
-     └────┬───┘                                      │
-          │                                          │
-          ▼                                          │
-     ┌────────┐                                      │
-     │DEVELOP │ ← TDD: Red → Green → Verify          │
-     └────┬───┘                                      │
-          │                                          │
-          ▼                                          │
-    ┌──────────┐                                     │
-    │ REFACTOR │ ← Improve design, tests green       │
-    └────┬─────┘                                     │
-          │                                          │
-          ▼                                          │
-     ┌────────┐                                      │
-     │ COMMIT │ ← Save state                         │
-     └────┬───┘                                      │
-          │                                          │
-          ▼                                          │
-     ┌────────┐    More tasks?                      │
-     │ITERATE │ ───────────────────────────────────►─┘
-     └────┬───┘ 
-          │ 
-          ▼ Done
-     ┌────────┐
-     │  END   │
-     └────────┘ 
-```
-
 ## Announcing Phase Transitions
 
 When switching phases, announce clearly:
@@ -150,12 +90,12 @@ When switching phases, announce clearly:
 
 ## Integration with Sub-Skills
 
-| Phase | Skill | Agent |
-|-------|-------|-------|
-| PLAN | (inline) | — |
-| DEVELOP | `development` | — |
-| REFACTOR | `refactor` | — |
-| COMMIT | `commit-helper` | `commit-helper` |
+| Phase | Skill |
+|-------|-------|
+| PLAN | `planning` |
+| DEVELOP | `development` |
+| REFACTOR | `refactor` |
+| COMMIT | `commit-helper` |
 
 ## Core Principles (Always Apply)
 
