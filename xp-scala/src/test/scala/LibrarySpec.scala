@@ -35,3 +35,10 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.searchByTitle("pragmatic")
 
     assertEquals(result, Right(List(book1)))
+
+  test("search with fewer than 3 non-whitespace characters returns error"):
+    val library = Library.empty
+
+    val result = library.searchByTitle("ab")
+
+    assertEquals(result, Left(LibraryError.InvalidSearchQuery))
