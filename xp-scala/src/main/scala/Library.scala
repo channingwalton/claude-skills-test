@@ -13,12 +13,22 @@ enum LibraryError:
 case class Library(
     books: List[Book],
     members: List[Member] = List.empty,
-    withdrawals: Map[Book, Member] = Map.empty
+    withdrawals: Map[Book, List[Member]] = Map.empty,
+    copies: Map[Book, Int] = Map.empty
 ):
   def addBook(book: Book): Either[LibraryError, Library] =
     if book.isbn.isBlank then Left(LibraryError.InvalidISBN)
-    else if books.exists(_.isbn == book.isbn) then Right(this)
-    else Right(copy(books = books :+ book))
+    else
+      val existingBook = books.find(_.isbn == book.isbn)
+      existingBook match
+        case Some(existing) =>
+          val currentCount = copies.getOrElse(existing, 1)
+          Right(copy(copies = copies + (existing -> (currentCount + 1))))
+        case None =>
+          Right(copy(books = books :+ book, copies = copies + (book -> 1)))
+
+  def copiesOf(book: Book): Int =
+    copies.getOrElse(book, 0)
 
   def addMember(member: Member): Library =
     if members.exists(_.name == member.name) then this
@@ -33,18 +43,21 @@ case class Library(
     else Right(copy(members = members.filterNot(_.name == member.name)))
 
   def withdraw(member: Member, book: Book): Either[LibraryError, Library] =
-    withdrawals.get(book) match
-      case Some(holder) if holder == member => Left(LibraryError.BookAlreadyHeld)
-      case Some(_)                          => Left(LibraryError.BookUnavailable)
-      case None                             => Right(copy(withdrawals = withdrawals + (book -> member)))
+    val holders = withdrawals.getOrElse(book, List.empty)
+    if holders.contains(member) then Left(LibraryError.BookAlreadyHeld)
+    else if holders.nonEmpty then Left(LibraryError.BookUnavailable)
+    else Right(copy(withdrawals = withdrawals + (book -> List(member))))
 
   def booksFor(member: Member): List[Book] =
-    withdrawals.collect { case (book, holder) if holder == member => book }.toList
+    withdrawals.collect { case (book, holders) if holders.contains(member) => book }.toList
 
   def returnBook(member: Member, book: Book): Either[LibraryError, Library] =
-    withdrawals.get(book) match
-      case Some(holder) if holder == member => Right(copy(withdrawals = withdrawals - book))
-      case _                                => Left(LibraryError.BookNotHeld)
+    val holders = withdrawals.getOrElse(book, List.empty)
+    if holders.contains(member) then
+      val remaining = holders.filterNot(_ == member)
+      if remaining.isEmpty then Right(copy(withdrawals = withdrawals - book))
+      else Right(copy(withdrawals = withdrawals + (book -> remaining)))
+    else Left(LibraryError.BookNotHeld)
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
