@@ -13,7 +13,8 @@
       "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala add src/)",
       "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala commit -m \"$\\(cat <<''EOF''\nfeat: add Library with empty factory method\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Skill(planning)",
-      "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala commit -m \"$\\(cat <<''EOF''\nfeat: ignore books with duplicate ISBN\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala commit -m \"$\\(cat <<''EOF''\nfeat: ignore books with duplicate ISBN\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C /Users/channing/dev/claude-skills-test/xp-scala commit -m \"$\\(cat <<''EOF''\nfeat: add searchByTitle with case-insensitive matching\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }
