@@ -57,3 +57,11 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.searchByAuthor("martin")
 
     assertEquals(result, Right(List(book2)))
+
+  test("search by ISBN normalizes query and book ISBN to digits only"):
+    val book = Book("Clean Code", "Robert Martin", "978-0-13-235088-4")
+    val library = Library(List(book))
+
+    val result = library.searchByISBN("978-013")
+
+    assertEquals(result, Right(List(book)))

@@ -16,6 +16,10 @@ case class Library(books: List[Book]):
   def searchByAuthor(query: String): Either[LibraryError, List[Book]] =
     search(query, _.author)
 
+  def searchByISBN(query: String): Either[LibraryError, List[Book]] =
+    val normalizedQuery = query.filter(_.isDigit)
+    Right(books.filter(_.isbn.filter(_.isDigit).contains(normalizedQuery)))
+
   private def search(query: String, field: Book => String): Either[LibraryError, List[Book]] =
     if query.filterNot(_.isWhitespace).length < 3 then Left(LibraryError.InvalidSearchQuery)
     else Right(books.filter(field(_).toLowerCase.contains(query.toLowerCase)))
