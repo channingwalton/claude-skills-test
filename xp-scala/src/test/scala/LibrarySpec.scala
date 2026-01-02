@@ -65,3 +65,11 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.searchByISBN("978-013")
 
     assertEquals(result, Right(List(book)))
+
+  test("search by ISBN strips ISBN prefix from query"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val library = Library(List(book))
+
+    val result = library.searchByISBN("ISBN978")
+
+    assertEquals(result, Right(List(book)))
