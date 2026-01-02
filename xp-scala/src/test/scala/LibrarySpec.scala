@@ -132,3 +132,13 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.withdraw(alice, book)
 
     assert(result.isRight)
+
+  test("cannot withdraw book already withdrawn by someone else"):
+    val book = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val library = Library(List(book), List(alice, bob), Map(book -> alice))
+
+    val result = library.withdraw(bob, book)
+
+    assertEquals(result, Left(LibraryError.BookUnavailable))
