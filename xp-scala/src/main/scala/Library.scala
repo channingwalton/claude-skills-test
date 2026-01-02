@@ -13,7 +13,7 @@ enum LibraryError:
 case class Library(
     copies: Map[Book, Int] = Map.empty,
     members: List[Member] = List.empty,
-    withdrawals: Map[Book, List[Member]] = Map.empty
+    withdrawals: Map[Member, List[Book]] = Map.empty
 ):
   def books: List[Book] = copies.keys.toList
 
@@ -44,21 +44,22 @@ case class Library(
     else Right(copy(members = members.filterNot(_.name == member.name)))
 
   def withdraw(member: Member, book: Book): Either[LibraryError, Library] =
-    val holders = withdrawals.getOrElse(book, List.empty)
-    val availableCopies = copiesOf(book) - holders.length
-    if holders.contains(member) then Left(LibraryError.BookAlreadyHeld)
+    val memberBooks = booksFor(member)
+    val withdrawnCount = withdrawals.values.flatten.count(_ == book)
+    val availableCopies = copiesOf(book) - withdrawnCount
+    if memberBooks.contains(book) then Left(LibraryError.BookAlreadyHeld)
     else if availableCopies <= 0 then Left(LibraryError.BookUnavailable)
-    else Right(copy(withdrawals = withdrawals + (book -> (holders :+ member))))
+    else Right(copy(withdrawals = withdrawals + (member -> (memberBooks :+ book))))
 
   def booksFor(member: Member): List[Book] =
-    withdrawals.collect { case (book, holders) if holders.contains(member) => book }.toList
+    withdrawals.getOrElse(member, List.empty)
 
   def returnBook(member: Member, book: Book): Either[LibraryError, Library] =
-    val holders = withdrawals.getOrElse(book, List.empty)
-    if holders.contains(member) then
-      val remaining = holders.filterNot(_ == member)
-      if remaining.isEmpty then Right(copy(withdrawals = withdrawals - book))
-      else Right(copy(withdrawals = withdrawals + (book -> remaining)))
+    val memberBooks = booksFor(member)
+    if memberBooks.contains(book) then
+      val remaining = memberBooks.filterNot(_ == book)
+      if remaining.isEmpty then Right(copy(withdrawals = withdrawals - member))
+      else Right(copy(withdrawals = withdrawals + (member -> remaining)))
     else Left(LibraryError.BookNotHeld)
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
