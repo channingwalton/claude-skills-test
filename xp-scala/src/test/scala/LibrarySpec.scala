@@ -19,7 +19,7 @@ class LibrarySpec extends munit.FunSuite:
   test("adding a book with duplicate ISBN is ignored"):
     val book1 = Book("Clean Code", "Robert Martin", "978-0132350884")
     val book2 = Book("Different Title", "Different Author", "978-0132350884")
-    val library = Library.empty.addBook(book1).getOrElse(Library.empty)
+    val library = Library(List(book1))
 
     val result = library.addBook(book2)
 
@@ -28,9 +28,7 @@ class LibrarySpec extends munit.FunSuite:
   test("search by title returns matching books case insensitively"):
     val book1 = Book("The Pragmatic Programmer", "David Thomas", "978-0135957059")
     val book2 = Book("Clean Code", "Robert Martin", "978-0132350884")
-    val library = Library.empty
-      .addBook(book1).getOrElse(Library.empty)
-      .addBook(book2).getOrElse(Library.empty)
+    val library = Library(List(book1, book2))
 
     val result = library.searchByTitle("pragmatic")
 
@@ -45,7 +43,7 @@ class LibrarySpec extends munit.FunSuite:
 
   test("search with no matches returns empty list"):
     val book = Book("Clean Code", "Robert Martin", "978-0132350884")
-    val library = Library.empty.addBook(book).getOrElse(Library.empty)
+    val library = Library(List(book))
 
     val result = library.searchByTitle("nonexistent")
 
