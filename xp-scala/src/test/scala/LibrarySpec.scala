@@ -114,3 +114,12 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.removeMember(alice)
 
     assertEquals(result.map(_.members), Right(List(bob)))
+
+  test("removing a non-existent member returns error"):
+    val alice = Member("Alice")
+    val bob = Member("Bob")
+    val library = Library(List.empty, List(alice))
+
+    val result = library.removeMember(bob)
+
+    assertEquals(result, Left(LibraryError.NoSuchMember))

@@ -5,6 +5,7 @@ case class Member(name: String)
 enum LibraryError:
   case InvalidISBN
   case InvalidSearchQuery
+  case NoSuchMember
 
 case class Library(books: List[Book], members: List[Member] = List.empty):
   def addBook(book: Book): Either[LibraryError, Library] =
@@ -21,7 +22,8 @@ case class Library(books: List[Book], members: List[Member] = List.empty):
     else Right(members.filter(_.name.toLowerCase.contains(query.toLowerCase)))
 
   def removeMember(member: Member): Either[LibraryError, Library] =
-    Right(copy(members = members.filterNot(_.name == member.name)))
+    if !members.exists(_.name == member.name) then Left(LibraryError.NoSuchMember)
+    else Right(copy(members = members.filterNot(_.name == member.name)))
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
