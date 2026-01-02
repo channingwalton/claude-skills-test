@@ -63,7 +63,12 @@ This skill orchestrates the full XP workflow for feature implementation. It coor
 
 **Goal:** Improve code design while keeping tests green.
 
-**Invoke:** Switch to `refactor` skill:
+1. **Invoke:** Switch to `refactor` skill
+2. STOP
+
+- [ ] Ask the user if they want to see any other changes
+
+3. Ensure all tests pass before continuing
 
 ---
 

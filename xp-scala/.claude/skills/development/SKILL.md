@@ -18,7 +18,6 @@ description: Implement features using strict test-driven development. Use for th
 🔴 RED    → Write ONE failing test
 🟢 GREEN  → Write MINIMUM code to pass
 ✅ VERIFY → Run all tests, confirm green
-🔁 REPEAT → Next behaviour
 ```
 
 ## Detailed Steps
@@ -50,7 +49,7 @@ description: Implement features using strict test-driven development. Use for th
 - Hard-coded values are acceptable initially
 - Duplication is acceptable initially
 - "Ugly" code is acceptable initially
-- Refactoring comes AFTER green
+- Refactoring comes AFTER green using the refactoring skill
 
 ## Test Naming
 

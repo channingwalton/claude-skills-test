@@ -8,7 +8,7 @@ description: Improve code design without changing behaviour. Use for the REFACTO
 ## Core Rules (Non-Negotiable)
 
 1. **NEVER change behaviour** — refactoring preserves existing functionality
-2. **All tests must pass** before starting and after refactoring
+2. **All tests must pass** before and after refactoring
 3. **Small incremental changes** — one transformation at a time
 4. **Run tests after every change** — catch regressions immediately
 
@@ -53,16 +53,19 @@ description: Improve code design without changing behaviour. Use for the REFACTO
 ```
 
 Examples:
+
 - `🔵 REFACTOR → duplication: Extract method calculateTotal`
 - `🔵 REFACTOR → long method: Split processOrder into validate and execute`
 
 ## Safety Checklist
 
 Before starting:
+
 - [ ] All tests pass
 - [ ] Understand the code being refactored
 
 After each change:
+
 - [ ] Tests still pass
 - [ ] Behaviour unchanged
 - [ ] Code is cleaner/clearer
