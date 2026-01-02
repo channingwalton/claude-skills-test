@@ -20,6 +20,9 @@ case class Library(books: List[Book], members: List[Member] = List.empty):
     if query.filterNot(_.isWhitespace).length < 3 then Left(LibraryError.InvalidSearchQuery)
     else Right(members.filter(_.name.toLowerCase.contains(query.toLowerCase)))
 
+  def removeMember(member: Member): Either[LibraryError, Library] =
+    Right(copy(members = members.filterNot(_.name == member.name)))
+
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
 
