@@ -16,6 +16,10 @@ case class Library(books: List[Book], members: List[Member] = List.empty):
     if members.exists(_.name == member.name) then this
     else copy(members = members :+ member)
 
+  def findMemberByName(query: String): Either[LibraryError, List[Member]] =
+    if query.filterNot(_.isWhitespace).length < 3 then Left(LibraryError.InvalidSearchQuery)
+    else Right(members.filter(_.name.toLowerCase.contains(query.toLowerCase)))
+
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
 

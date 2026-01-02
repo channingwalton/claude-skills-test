@@ -96,3 +96,12 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.addMember(member)
 
     assertEquals(result.members, List(member))
+
+  test("find member by name returns matching members case insensitively"):
+    val alice = Member("Alice Smith")
+    val bob = Member("Bob Jones")
+    val library = Library(List.empty, List(alice, bob))
+
+    val result = library.findMemberByName("alice")
+
+    assertEquals(result, Right(List(alice)))
