@@ -57,3 +57,4 @@ rework to see how Claude copes with that.
 | 2 | [yolo-scala-fp](./yolo-scala-fp/README.md) | Basic [CLAUDE.md](./yolo-scala-fp/CLAUDE.md) for functional programming, one-shot | N/A | Scala 3 | [Log](./yolo-scala-fp/LOG.md) | Opus 4.5 |
 | 2 | [yolo-scala-tdd](./yolo-scala-tdd/README.md) | Basic [CLAUDE.md](./yolo-scala-tdd/CLAUDE.md) for Test Driven Development, one-shot | N/A | Scala 3 | [Log](./yolo-scala-tdd/LOG.md) | Opus 4.5 |
 | 2 | [yolo-scala-tdd-fp](./yolo-scala-tdd-fp/README.md) | Basic [CLAUDE.md](./yolo-scala-tdd-fp/CLAUDE.md) for Test Driven Development with Functional Programming, one-shot | N/A | Scala 3 | [Log](./yolo-scala-tdd-fp/LOG.md) | Opus 4.5 |
+| 2 | [xp-scala](./xp-scala/README.md) | Basic [CLAUDE.md](./xp-scala/CLAUDE.md) for Extreme Programming with Functional Programming | 2 | Scala 3 | [Log](./xp-scala/LOG.md) | Opus 4.5 |
