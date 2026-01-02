@@ -7,7 +7,11 @@ enum LibraryError:
   case InvalidSearchQuery
   case NoSuchMember
 
-case class Library(books: List[Book], members: List[Member] = List.empty):
+case class Library(
+    books: List[Book],
+    members: List[Member] = List.empty,
+    withdrawals: Map[Book, Member] = Map.empty
+):
   def addBook(book: Book): Either[LibraryError, Library] =
     if book.isbn.isBlank then Left(LibraryError.InvalidISBN)
     else if books.exists(_.isbn == book.isbn) then Right(this)
@@ -24,6 +28,9 @@ case class Library(books: List[Book], members: List[Member] = List.empty):
   def removeMember(member: Member): Either[LibraryError, Library] =
     if !members.exists(_.name == member.name) then Left(LibraryError.NoSuchMember)
     else Right(copy(members = members.filterNot(_.name == member.name)))
+
+  def withdraw(member: Member, book: Book): Either[LibraryError, Library] =
+    Right(copy(withdrawals = withdrawals + (book -> member)))
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
