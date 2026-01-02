@@ -15,3 +15,12 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.addBook(book)
 
     assertEquals(result, Left(LibraryError.InvalidISBN))
+
+  test("adding a book with duplicate ISBN is ignored"):
+    val book1 = Book("Clean Code", "Robert Martin", "978-0132350884")
+    val book2 = Book("Different Title", "Different Author", "978-0132350884")
+    val library = Library.empty.addBook(book1).getOrElse(Library.empty)
+
+    val result = library.addBook(book2)
+
+    assertEquals(result.map(_.books), Right(List(book1)))
