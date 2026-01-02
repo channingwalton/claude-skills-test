@@ -11,8 +11,14 @@ case class Library(books: List[Book]):
     else Right(Library(books :+ book))
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
+    search(query, _.title)
+
+  def searchByAuthor(query: String): Either[LibraryError, List[Book]] =
+    search(query, _.author)
+
+  private def search(query: String, field: Book => String): Either[LibraryError, List[Book]] =
     if query.filterNot(_.isWhitespace).length < 3 then Left(LibraryError.InvalidSearchQuery)
-    else Right(books.filter(_.title.toLowerCase.contains(query.toLowerCase)))
+    else Right(books.filter(field(_).toLowerCase.contains(query.toLowerCase)))
 
 object Library:
   def empty: Library = Library(List.empty)
