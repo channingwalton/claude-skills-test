@@ -8,6 +8,7 @@ enum LibraryError:
   case NoSuchMember
   case BookUnavailable
   case BookAlreadyHeld
+  case BookNotHeld
 
 case class Library(
     books: List[Book],
@@ -41,7 +42,9 @@ case class Library(
     withdrawals.collect { case (book, holder) if holder == member => book }.toList
 
   def returnBook(member: Member, book: Book): Either[LibraryError, Library] =
-    Right(copy(withdrawals = withdrawals - book))
+    withdrawals.get(book) match
+      case Some(holder) if holder == member => Right(copy(withdrawals = withdrawals - book))
+      case _                                => Left(LibraryError.BookNotHeld)
 
   def searchByTitle(query: String): Either[LibraryError, List[Book]] =
     search(query, _.title)
