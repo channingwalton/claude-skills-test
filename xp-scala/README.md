@@ -2,6 +2,8 @@
 
 This experiment uses Extreme Programming Skills combined with basic FP skills, implemented in Scala.
 
+Note that the XP side of the skills have nothing related to Scala in them.
+
 ## Typical Claude Code Interaction with this SKILL set
 
 ```
