@@ -73,3 +73,10 @@ class LibrarySpec extends munit.FunSuite:
     val result = library.searchByISBN("ISBN978")
 
     assertEquals(result, Right(List(book)))
+
+  test("search by ISBN with fewer than 3 digits returns error"):
+    val library = Library.empty
+
+    val result = library.searchByISBN("ISBN-97")
+
+    assertEquals(result, Left(LibraryError.InvalidSearchQuery))
